@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
 import { HiMenuAlt4 } from "react-icons/hi";
+import { IoMdArrowDropright } from "react-icons/io";
+
 
 const Nav = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -24,7 +26,7 @@ const Nav = () => {
             <p
               className={
                 pathname === "/mission"
-                  ? "border-b-2 border-gray-300 px-1 py-1"
+                  ? "border-b-2 border-red-600 px-1 py-1"
                   : "text-white"
               }
             >
@@ -35,7 +37,7 @@ const Nav = () => {
             <p
               className={
                 pathname === "/training"
-                  ? "border-b-2 border-gray-300 px-1 py-1"
+                  ? "border-b-2 border-red-600 px-1 py-1"
                   : "text-white"
               }
             >
@@ -46,7 +48,7 @@ const Nav = () => {
             <p
               className={
                 pathname === "/contact"
-                  ? "border-b-2 border-gray-300 px-1 py-1"
+                  ? "border-b-2 border-red-600 px-1 py-1"
                   : "text-white"
               }
             >
@@ -57,9 +59,9 @@ const Nav = () => {
         <motion.p
           whileTap={{ scale: 0.7 }}
           onClick={() => setMakeBold(false)}
-          className="px-5 py-1 bg-white text-black rounded-3xl cursor-pointer"
+          className="px-5 py-2 bg-white flex items-center gap-1 text-black rounded-xl cursor-pointer"
         >
-          Log In
+          Log In <IoMdArrowDropright className="text-red-600"/>
         </motion.p>
       </div>
 
@@ -91,7 +93,7 @@ const Nav = () => {
           </div>
         </div>
         {toggleMenu && (
-          <div className="bg-green-50 z-50 text-gray-700 h-max w-40 absolute top-20 right-8 py-4 rounded-xl shadow-md">
+          <div className="bg-white z-50 text-gray-900 h-max w-40 absolute top-20 right-8 py-4 rounded-xl shadow-md">
             <div className="flex flex-col gap-3 items-center w-5/6 mx-auto text-lg font-semibold ">
               <Link
                 href="/mission"
