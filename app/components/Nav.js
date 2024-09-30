@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { HiMenuAlt4 } from "react-icons/hi";
 
 const Nav = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -82,7 +82,7 @@ const Nav = () => {
               </motion.p>
             ) : (
               <motion.p whileTap={{ scale: 0.7 }}>
-                <GiHamburgerMenu
+                <HiMenuAlt4
                   className="text-xl cursor-pointer text-white"
                   onClick={() => setToggleMenu((prev) => !prev)}
                 />

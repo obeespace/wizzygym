@@ -1,24 +1,48 @@
-import React from 'react'
+import React from "react";
 import {
-    BsDribbble,
-    BsFacebook,
-    BsInstagram,
-    BsLinkedin,
-  } from "react-icons/bs";
+  BsDribbble,
+  BsFacebook,
+  BsInstagram,
+  BsLinkedin,
+} from "react-icons/bs";
+import contactimage from "../image/contactimage2.png";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 const page = () => {
   return (
-    <main className='w-5/6 mx-auto mt-20'>
-      <section className=" container mx-auto">
-        <div className="lg:w-3/6">
+    <main className="w-5/6 mx-auto my-20">
+      {/* <div className="lg:w-3/6">
           <p className="mb-2">Contact us</p>
-          <p className="text-4xl font-semibold">Let’s Build Ourselves</p>
-          <p className="mt-3 text-lg">
-            Ready to change the narrative and take your
-            fitness to the next level? We’d love to hear from you. Don’t be shy, say hello! 
+          <p className="text-4xl font-semibold">Let’s Build Something</p>
+          <p className="mt-3 text-lg text-gray-700">
+            Don’t be shy, say hello! Ready to change the world with your project
+            or have questions
+          </p>
+        </div> */}
+      <div className="relative">
+        <Image
+          src={contactimage}
+          className="w-screen rounded-3xl h-80 lg:h-96 lg:object-cover "
+        />
+        <div
+          className="absolute flex flex-col  
+            items-center top-0 
+            bottom-0 text-center"
+        >
+          <p className="text-4xl mt-5 lg:text-5xl font-playfair">
+          Contact us
+          </p>
+          <p className="italic mt-5 font-thin text-lg text-center">
+          Let’s Build Something
+          </p>
+          <p className="mt-3 text-lg ">
+            Don’t be shy, say hello! Ready to change the world <br/>with your project
+            or have questions
           </p>
         </div>
-      </section>
+      </div>
 
       <section className="mt-40 mx-auto w-11/12 lg:flex justify-between">
         <div className="lg:w-5/12">
@@ -60,14 +84,14 @@ const page = () => {
             rows={5}
           />
           <div className="w-full flex justify-end mt-8">
-            <button className="bg-black text-white px-4 hover:bg-gray-900 py-3 rounded-md shadow-sm">
+            <button className="bg-white text-black px-4 hover:bg-gray-900 py-3 rounded-md">
               Send Message
             </button>
           </div>
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default page
+export default page;
