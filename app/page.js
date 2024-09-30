@@ -7,6 +7,10 @@ import icon3 from "./image/icon3.png";
 import landingpic from "./image/landingimage4.jpg";
 import landingimage from "./image/landingimage.jpg";
 import { IoMdArrowDropright } from "react-icons/io";
+import activity1 from './image/activity4.png'
+import activity2 from './image/activity2.png'
+import activity3 from './image/activity3.png'
+
 
 export default function Home() {
   return (
@@ -66,7 +70,7 @@ export default function Home() {
             className="rounded-3xl"
           />
           <div className="mt-14 lg:mt-0">
-            <p className="text-2xl font-semibold w-9/12">
+            <p className="text-2xl font-semibold lg:w-9/12">
               Struggling to get the right fitness state of mind?
             </p>
             <p className="mt-5 text-gray-200">
@@ -98,6 +102,11 @@ export default function Home() {
 
       <section className="lg:mt-40 mt-20">
         <p className="text-4xl font-bold">Personalized fitness classes <br/> for all <span className="text-red-600 italic">body goals</span></p>
+        <div className="lg:mt-20 mt-14 lg:w-5/6 mx-auto grid grid-cols-3 lg:gap-20 gap-5">
+          <div><Image src={activity1} alt="" className='w-screen lg:object-cover rounded-2xl'/></div>
+          <div><Image src={activity2} alt="" className='w-screen lg:object-cover rounded-2xl'/></div>
+          <div><Image src={activity3} alt="" className='w-screen lg:object-cover rounded-2xl'/></div>         
+        </div>
       </section>
     </main>
   );
