@@ -7,10 +7,9 @@ import icon3 from "./image/icon3.png";
 import landingpic from "./image/landingimage4.jpg";
 import landingimage from "./image/landingimage.jpg";
 import { IoMdArrowDropright } from "react-icons/io";
-import activity1 from './image/activity4.png'
-import activity2 from './image/activity2.png'
-import activity3 from './image/activity3.png'
-
+import activity1 from "./image/activity4.png";
+import activity2 from "./image/activity2.png";
+import activity3 from "./image/activity5.png";
 
 export default function Home() {
   return (
@@ -18,7 +17,8 @@ export default function Home() {
       <section className="lg:mt-20 mt-10">
         <div className="lg:flex justify-between gap-20 ">
           <p className="lg:text-8xl text-5xl font-black lg:w-4/6 w-full">
-            Step Up Your <span className="italic text-red-600">Fitness</span> Bod in Time
+            Step Up Your <span className="italic text-red-600">Fitness</span>{" "}
+            Bod in Time
           </p>
           <div className="mt-10 lg:mt-0 lg:w-5/12">
             <p className="">
@@ -60,8 +60,9 @@ export default function Home() {
 
       <section className="lg:mt-40 mt-20">
         <h1 className="text-center text-2xl lg:text-4xl lg:w-4/6 mx-auto font-semibold">
-          Fitness starts in your head. You must choose to eat clean, <span className="text-red-600 italic">exercise
-          regularly</span>, and treat your body with respect
+          Fitness starts in your head. You must choose to eat clean,{" "}
+          <span className="text-red-600 italic">exercise regularly</span>, and
+          treat your body with respect
         </h1>
         <div className="lg:grid grid-cols-2 items-center gap-20 lg:mt-32 mt-20">
           <Image
@@ -88,24 +89,64 @@ export default function Home() {
               can remind you of your form and encourage you to push through
               tough sets.
             </p>
-            <div className="w-full mt-5"><motion.button
-              whileTap={{ scale: 0.7 }}
-              onClick={() => setMakeBold(false)}
-              className="px-5 py-2 font-semibold flex items-center gap-1 bg-white text-black rounded-xl cursor-pointer"
-            >
-              Learn More <IoMdArrowDropright className="text-red-600"/>
-            </motion.button>
+            <div className="w-full mt-5">
+              <motion.button
+                whileTap={{ scale: 0.7 }}
+                onClick={() => setMakeBold(false)}
+                className="px-5 py-2 font-semibold flex items-center gap-1 bg-white text-black rounded-xl cursor-pointer"
+              >
+                Learn More <IoMdArrowDropright className="text-red-600" />
+              </motion.button>
             </div>
           </div>
         </div>
       </section>
 
       <section className="lg:mt-40 mt-20">
-        <p className="text-4xl font-bold">Personalized fitness classes <br/> for all <span className="text-red-600 italic">body goals</span></p>
+        <div className="flex justify-between items-end lg:items-start">
+          <p className="lg:text-4xl text-3xl font-bold lg:w-5/12 w-7/12">
+            Personalized fitness classes for all{" "}
+            <span className="text-red-600 italic">body goals</span>
+          </p>
+          
+          <motion.button
+            whileTap={{ scale: 0.7 }}
+            onClick={() => setMakeBold(false)}
+            className="px-5 py-2 font-semibold flex h-fit items-center gap-1 bg-white text-black rounded-xl cursor-pointer"
+          >
+            More Classes <IoMdArrowDropright className="text-red-600" />
+          </motion.button>
+          
+        </div>
         <div className="lg:mt-20 mt-14 lg:w-5/6 mx-auto grid grid-cols-3 lg:gap-20 gap-5">
-          <div><Image src={activity1} alt="" className='w-screen lg:object-cover rounded-2xl'/></div>
-          <div><Image src={activity2} alt="" className='w-screen lg:object-cover rounded-2xl'/></div>
-          <div><Image src={activity3} alt="" className='w-screen lg:object-cover rounded-2xl'/></div>         
+          <div className="relative">
+            <Image
+              src={activity1}
+              alt=""
+              className="w-screen lg:object-cover rounded-2xl"
+            />
+            <p className="text-bold text-xl absolute top-3 left-4">
+              Weight Loss
+            </p>
+          </div>
+          <div className="relative">
+            <Image
+              src={activity2}
+              alt=""
+              className="w-screen lg:object-cover rounded-2xl"
+            />
+            <p className="text-bold text-xl absolute top-3 left-4">Aerobics</p>
+          </div>
+          <div className="relative">
+            <Image
+              src={activity3}
+              alt=""
+              className="w-screen lg:object-cover rounded-2xl"
+            />
+            <p className="text-bold text-xl absolute top-3 left-4">
+              Muscle Gain
+            </p>
+          </div>
         </div>
       </section>
     </main>

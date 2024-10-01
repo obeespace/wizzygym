@@ -59,7 +59,7 @@ const Nav = () => {
         <motion.p
           whileTap={{ scale: 0.7 }}
           onClick={() => setMakeBold(false)}
-          className="px-5 py-2 bg-white flex items-center gap-1 text-black rounded-xl cursor-pointer"
+          className="px-5 py-2 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
         >
           Log In <IoMdArrowDropright className="text-red-600"/>
         </motion.p>
