@@ -10,6 +10,7 @@ import { IoMdArrowDropright } from "react-icons/io";
 import activity1 from "./image/activity4.png";
 import activity2 from "./image/activity2.png";
 import activity3 from "./image/activity5.png";
+import timetable from "./image/timetable.jpg"
 
 export default function Home() {
   return (
@@ -104,7 +105,7 @@ export default function Home() {
 
       <section className="lg:mt-40 mt-20">
         <div className="flex justify-between items-end lg:items-start">
-          <p className="lg:text-4xl text-3xl font-bold lg:w-5/12 w-7/12">
+          <p className="lg:text-4xl text-3xl font-bold lg:w-5/12">
             Personalized fitness classes for all{" "}
             <span className="text-red-600 italic">body goals</span>
           </p>
@@ -112,7 +113,7 @@ export default function Home() {
           <motion.button
             whileTap={{ scale: 0.7 }}
             onClick={() => setMakeBold(false)}
-            className="px-5 py-2 font-semibold flex h-fit items-center gap-1 bg-white text-black rounded-xl cursor-pointer"
+            className="px-5 py-2 hidden font-semibold lg:flex h-fit items-center gap-1 bg-white text-black rounded-xl cursor-pointer"
           >
             More Classes <IoMdArrowDropright className="text-red-600" />
           </motion.button>
@@ -148,6 +149,19 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div className="flex justify-end"><motion.button
+            whileTap={{ scale: 0.7 }}
+            onClick={() => setMakeBold(false)}
+            className="px-5 py-2 lg:hidden flex mt-10 font-semibold items-center gap-1 bg-white text-black rounded-xl cursor-pointer"
+          >
+            More Classes <IoMdArrowDropright className="text-red-600" />
+          </motion.button>
+          </div>
+      </section>
+
+      <section className="lg:mt-40 mt-20">
+        <p className="lg:text-4xl text-3xl w-4/6 mx-auto lg:w-full font-bold text-center">Peep our <span className="text-red-600 italic">Daily</span> Fitness Shedule</p>
+        <div className="mt-10 border border-white h-80 lg:w-5/6 mx-auto rounded-2xl"></div>
       </section>
     </main>
   );
