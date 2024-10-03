@@ -56,13 +56,14 @@ const Nav = () => {
             </p>
           </Link>
         </div>
-        <motion.p
+        <Link href="signin"><motion.p
           whileTap={{ scale: 0.7 }}
+          
           onClick={() => setMakeBold(false)}
           className="px-5 py-2 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
         >
           Log In <IoMdArrowDropright className="text-red-600"/>
-        </motion.p>
+        </motion.p></Link>
       </div>
 
       {/* Mobile Header */}
@@ -129,7 +130,7 @@ const Nav = () => {
                 </p>
               </Link>
               <Link
-                href="/"
+                href="/signin"
                 className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
               >
                 <p

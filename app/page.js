@@ -163,6 +163,52 @@ export default function Home() {
         <p className="lg:text-4xl text-3xl w-4/6 mx-auto lg:w-full font-bold text-center">Peep our <span className="text-red-600 italic">Daily</span> Fitness Shedule</p>
         <div className="mt-10 border border-white h-80 lg:w-5/6 mx-auto rounded-2xl"></div>
       </section>
+
+      <section id="plans" className="lg:mt-40 mt-20">
+        <div className='w-5/6 mx-auto'>
+          <div className="flex flex-col lg:justify-center mb-16">
+            <p className='font-bold text-3xl text-center mt-2'>Take on a <span className="text-red-600 italic">Challenge</span> That Suits You</p>
+          </div>
+          
+          <div className='lg:flex justify-center gap-10'>
+            <div className='border border-red-600 px-12 py-6 text-center rounded-3xl'>
+              <p className="text-sm">Daily Plan</p>
+              <p className='text-red-600 font-black mt-3 text-lg'>N1000</p>
+              <div className='mt-7'>
+                <p>Access to all equipments</p>
+                <p>Aerobics</p>
+                <p>General Instructor</p>
+              </div>
+            </div>
+
+            <div className='bg-red-800 text-white px-12 py-6 mt-6 lg:mt-0 text-center rounded-3xl'>
+              <p className="text-sm">Monthly Plan</p>
+              <p className='font-black mt-3 text-lg'>N5000</p>
+              <div className='mt-7'>
+                <p>Access to all equipments</p>
+                <p>Aerobics and Yoga</p>
+                <p>Personal Instructor</p>
+                <p>Dance Classes</p>
+                <p>Free Supplements</p>
+                <p>Meal Plans</p>
+              </div>
+            </div>
+
+            <div className='border border-red-600 px-12 py-6 mt-6 lg:mt-0 text-center rounded-3xl'>
+              <p className="text-sm">3 Months Plan</p>
+              <p className='text-red-600 font-black mt-3 text-lg'>N12000</p>
+              <div className='mt-7'>
+                <p>Access to all equipments</p>
+                <p>Aerobics and Yoga</p>
+                <p>General Instructor</p>
+                <p>Dance Classes</p>
+                <p>Free Supplements</p>
+                <p>Meal Plans</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
