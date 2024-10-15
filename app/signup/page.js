@@ -18,7 +18,7 @@ const page = () => {
       <div className="mt-10">
         <div className="flex gap-5">
           <input
-            className="border-b border-rose-900 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
+            className="border-b border-red-600 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
             type="text"
             id="firstname"
             placeholder="First Name"
@@ -29,7 +29,7 @@ const page = () => {
           />
 
           <input
-            className="border-b border-rose-900 shadow-sm px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
+            className="border-b border-red-600 shadow-sm px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
             type="text"
             id="lastname"
             placeholder="Last Name"
@@ -42,7 +42,7 @@ const page = () => {
         
 
         <input
-          className="border-b border-rose-900 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
+          className="border-b border-red-600 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
           type="email"
           id="email"
           placeholder="Email"
@@ -52,8 +52,20 @@ const page = () => {
           required
         />
 
+<input
+          className="border-b border-red-600 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
+          type="number"
+          id="phone"
+          placeholder="Phone Number"
+
+          name="phone"
+          //   value={email}
+          //   onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
         <input
-          className="border-b border-rose-900 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
+          className="border-b border-red-600 px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
           type="password"
           id="password"
           placeholder="Password"
@@ -69,12 +81,12 @@ const page = () => {
           </p></Link>
         </div>
         <div className="flex justify-center">
-          <motion.p
+          <Link href="/user"><motion.p
             whileTap={{ scale: 0.7 }}
-            className="px-5 py-2 mt-4 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+            className="px-7 py-3 mt-7 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
           >
             Sign up <IoMdArrowDropright className="text-red-600" />
-          </motion.p>
+          </motion.p></Link>
         </div>
         {/* <ToastContainer /> */}
       </div>

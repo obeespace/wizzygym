@@ -42,12 +42,12 @@ const page = () => {
         </div>
 
         <div className="flex justify-center">
-        <motion.p
+        <Link href="/admin"><motion.p
           whileTap={{ scale: 0.7 }}
-          className="px-5 py-2 mt-4 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+          className="px-7 py-3 mt-7 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
         >
           Sign in <IoMdArrowDropright className="text-red-600"/>
-        </motion.p>
+        </motion.p></Link>
         </div>
       </div>
       {/* <ToastContainer /> */}
