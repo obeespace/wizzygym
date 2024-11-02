@@ -15,6 +15,7 @@ import timetable from "./image/timetable.jpg"
 export default function Home() {
   return (
     <main className="w-5/6 mx-auto">
+
       <section className="lg:mt-20 mt-10">
         <div className="lg:flex justify-between gap-20 ">
           <p className="lg:text-8xl text-5xl font-black lg:w-4/6 w-full">

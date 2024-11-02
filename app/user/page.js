@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineCardMembership } from "react-icons/md";
@@ -14,20 +14,60 @@ import { RiProfileLine } from "react-icons/ri";
 import { LuMoreVertical } from "react-icons/lu";
 import { IoMdArrowDropright } from "react-icons/io";
 import { IoCardOutline } from "react-icons/io5";
-
+import jwt_decode from "jsonwebtoken";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        // Decode the token to get user ID (adjust this if your token structure differs)
+        const decoded = jwt_decode.decode(token);
+        const userId = decoded.id;
+
+        // Fetch user data from backend using the ID
+        axios
+          .get(`http://localhost:2101/user/findUser/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`, // Pass token to backend for authorization
+            },
+          })
+          .then((res) => {
+            setUserInfo(res.data);
+          })
+          .catch((err) => {
+            console.error("Error fetching user data:", err);
+            // Redirect to login if unauthorized
+            if (err.response && err.response.status === 401) {
+              router.push("/signin");
+            }
+          });
+      } catch (error) {
+        console.error("Token decoding error:", error);
+        router.push("/signin");
+      }
+    } else {
+      router.push("/signin"); // Redirect to login if no token is found
+    }
+  }, [router]);
+
+  if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
 
   return (
     <div className="w-5/6 mx-auto mt-10">
       <div className="lg:flex gap-5">
         <div className="">
           <p className="text-3xl font-semibold">
-            <span className="italic text-red-600">Hi</span>, User
+            <span className="italic text-red-600">Hi</span>, {userInfo.nickname}
           </p>
           <p className="text-sm">Lets look at your data</p>
-          <div className="mt-7 lg:flex lg:gap-5 gap-2">
+          <div className="mt-7 lg:flex grid grid-cols-2 lg:gap-5 gap-2">
             <div className="rounded-xl shadow-sm lg:px-3 px-5 py-5 mb-3 shadow-gray-700 border border-gray-700">
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <MdOutlineCardMembership className="text-black" />
@@ -35,9 +75,9 @@ const page = () => {
               <p className="text-xl font-semibold mt-4 text-green-600">
                 Active
               </p>
-              <div className="flex lg:block justify-between items-center">
+              <div className="">
                 <p className="text-sm">Subscription status</p>
-                <p className="text-green-600 lg:mt-4 mt-0">See Plans</p>
+                <p className="text-green-600 mt-4">See Plans</p>
               </div>
             </div>
 
@@ -46,9 +86,9 @@ const page = () => {
                 <HiStatusOnline className="text-black" />
               </div>
               <p className="text-xl font-semibold mt-4">Wisdom</p>
-              <div className="flex lg:block justify-between items-center">
+              <div className="">
                 <p className="text-sm">Assigned trainer</p>
-                <p className="text-red-600 lg:mt-4 mt-0">change Trainer</p>
+                <p className="text-red-600 mt-4">change Trainer</p>
               </div>
             </div>
 
@@ -186,23 +226,22 @@ const page = () => {
                 )}
               </div>
               {toggleMenu && (
-          <div className="bg-white z-50 text-gray-900 h-max w-40 absolute top-20 right-8 py-4 rounded-xl shadow-md">
-            <div className="flex flex-col gap-3 items-center w-5/6 mx-auto text-lg font-semibold ">
-              <Link
-                href="/mission"
-                className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
-              >
-                <p
-                  className="px-3 py-2"
-                  onClick={() => setToggleMenu((prev) => !prev)}
-                >
-                  Mission
-                </p>
-              </Link>
-              
-            </div>
-          </div>
-        )}
+                <div className="bg-white z-50 text-gray-900 h-max w-40 absolute top-20 right-8 py-4 rounded-xl shadow-md">
+                  <div className="flex flex-col gap-3 items-center w-5/6 mx-auto text-lg font-semibold ">
+                    <Link
+                      href="/mission"
+                      className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
+                    >
+                      <p
+                        className="px-3 py-2"
+                        onClick={() => setToggleMenu((prev) => !prev)}
+                      >
+                        Mission
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="mt-5">
