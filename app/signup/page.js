@@ -76,7 +76,7 @@ const page = () => {
   // Redirect after successful promise resolution
   promise.then(() => {
     setTimeout(() => {
-      router.push("/user");
+      router.push("/signin");
     }, 1000);
   });
   };
@@ -145,7 +145,8 @@ const page = () => {
             <option value="">Select Goal</option>
             <option value="General Fitness">General Fitness</option>
             <option value="Muscle Gain">Muscle Gain</option>
-            <option value="2">Weight Loss</option>
+            <option value="Weight Loss">Weight Loss</option>
+            <option value="Gluts build">Gluts build</option>
           </select>
         </div>
 
@@ -170,7 +171,7 @@ const page = () => {
             onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <div className="-mt-2 flex justify-end">
+        <div className="-mt-2 flex text-white justify-end">
           <Link href="/signin">
             <p className="hover:underline text-sm">
               Already have an account? Sign in

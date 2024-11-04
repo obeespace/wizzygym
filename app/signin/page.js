@@ -51,7 +51,13 @@ const page = () => {
   
     // Handle the redirection after successful promise resolution
     promise.then(() => {
-      router.push("/user");
+      if (localStorage.getItem("email") === "obeewon20@gmail.com") {
+
+        router.push("/admin");
+      } else {
+        router.push("/user");
+      }
+      
     });
   };
   

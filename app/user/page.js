@@ -73,7 +73,7 @@ const page = () => {
                 <MdOutlineCardMembership className="text-black" />
               </div>
               <p className="text-xl font-semibold mt-4 text-green-600">
-                Active
+                {userInfo.subscription}
               </p>
               <div className="">
                 <p className="text-sm">Subscription status</p>
@@ -85,7 +85,7 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <HiStatusOnline className="text-black" />
               </div>
-              <p className="text-xl font-semibold mt-4">Wisdom</p>
+              <p className="text-xl font-semibold mt-4">{userInfo.trainer}</p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
                 <p className="text-red-600 mt-4">change Trainer</p>
@@ -96,7 +96,7 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <IoMdFitness className="text-black" />
               </div>
-              <p className="text-xl font-semibold mt-4">Weight Loss</p>
+              <p className="text-xl font-semibold mt-4">{userInfo.bodygoals}</p>
               <p className="text-sm">Major fitness/body Goals</p>
               <div></div>
               <p className="text-green-600 mt-4 hover:underline cursor-pointer flex items-center">
@@ -206,7 +206,7 @@ const page = () => {
                   <RiProfileLine className="text-black" />
                 </div>
 
-                <p className="font-semibold">Wisdom Ojong</p>
+                <p className="font-semibold">{userInfo.fullname}</p>
               </div>
               <div className="">
                 {toggleMenu ? (
@@ -228,7 +228,7 @@ const page = () => {
               {toggleMenu && (
                 <div className="bg-white z-50 text-gray-900 h-max w-40 absolute top-20 right-8 py-4 rounded-xl shadow-md">
                   <div className="flex flex-col gap-3 items-center w-5/6 mx-auto text-lg font-semibold ">
-                    <Link
+                    {/* <Link
                       href="/mission"
                       className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
                     >
@@ -238,7 +238,7 @@ const page = () => {
                       >
                         Mission
                       </p>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               )}
@@ -250,7 +250,7 @@ const page = () => {
                   <WiSunrise className="text-black" />
                 </div>
 
-                <p>wizdomuyhh@gmail.com</p>
+                <p>{userInfo.email}</p>
               </div>
             </div>
             <div className="mt-5">
@@ -258,7 +258,7 @@ const page = () => {
                 <div className="bg-white rounded-full px-1 py-1">
                   <WiDaySunnyOvercast className="text-black" />
                 </div>
-                <p>6755543324689</p>
+                <p>{userInfo.phoneNumber}</p>
               </div>
             </div>
             <div className="mt-5">
@@ -266,7 +266,7 @@ const page = () => {
                 <div className="bg-white rounded-full px-1 py-1">
                   <WiDaySunny className="text-black" />
                 </div>
-                <p>*****************</p>
+                <p>{userInfo.gender}</p>
               </div>
             </div>
             <div className="mt-5">
@@ -274,7 +274,7 @@ const page = () => {
                 <div className="bg-white rounded-full px-1 py-1">
                   <TiWeatherNight className="text-black" />
                 </div>
-                <p>17th November, 2024</p>
+                <p>Service End Date</p>
               </div>
             </div>
           </div>
