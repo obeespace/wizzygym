@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
@@ -10,8 +10,14 @@ import { IoMdArrowDropright } from "react-icons/io";
 
 const Nav = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [makeBold, setMakeBold] = useState(false);
   const pathname = usePathname();
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  }, []);
+
   return (
     <div className="w-5/6 mx-auto py-5">
       {/* Desktop Header */}
@@ -22,17 +28,7 @@ const Nav = () => {
           </Link>
         </div>
         <div className="flex gap-10 items-center">
-          <Link href="/mission">
-            <p
-              className={
-                pathname === "/mission"
-                  ? "border-b-2 border-red-600 px-1 py-1"
-                  : "text-white"
-              }
-            >
-              Mission
-            </p>
-          </Link>
+          
           <Link href="training">
             <p
               className={
@@ -42,6 +38,17 @@ const Nav = () => {
               }
             >
               Training
+            </p>
+          </Link>
+          <Link href="/blog">
+            <p
+              className={
+                pathname === "/mission"
+                  ? "border-b-2 border-red-600 px-1 py-1"
+                  : "text-white"
+              }
+            >
+              Blog
             </p>
           </Link>
           <Link href="contact">
@@ -56,14 +63,20 @@ const Nav = () => {
             </p>
           </Link>
         </div>
-        <Link href="signin"><motion.p
+        {!token ? (<Link href="signin">
+          <motion.p
           whileTap={{ scale: 0.7 }}
-          
-          onClick={() => setMakeBold(false)}
           className="px-5 py-2 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
         >
           Log In <IoMdArrowDropright className="text-red-600"/>
+        </motion.p></Link>) : (
+          <Link href="user"><motion.p
+          whileTap={{ scale: 0.7 }}
+          className="px-5 py-2 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+        >
+          Dash Board <IoMdArrowDropright className="text-red-600"/>
         </motion.p></Link>
+        )}
       </div>
 
       {/* Mobile Header */}
@@ -96,17 +109,7 @@ const Nav = () => {
         {toggleMenu && (
           <div className="bg-white z-50 text-gray-900 h-max w-40 absolute top-20 right-8 py-4 rounded-xl shadow-md">
             <div className="flex flex-col gap-3 items-center w-5/6 mx-auto text-lg font-semibold ">
-              <Link
-                href="/mission"
-                className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
-              >
-                <p
-                  className="px-3 py-2"
-                  onClick={() => setToggleMenu((prev) => !prev)}
-                >
-                  Mission
-                </p>
-              </Link>
+            
               <Link
                 href="/training"
                 className="hover:bg-gray-700 w-full hover:text-white text-center rounded-md"
@@ -116,6 +119,18 @@ const Nav = () => {
                   onClick={() => setToggleMenu((prev) => !prev)}
                 >
                   Training
+                </p>
+              </Link>
+
+              <Link
+                href="/blog"
+                className="hover:bg-gray-700 w-full hover:text-white text-center rounded-md"
+              >
+                <p
+                  className=" hover:border-green-700 px-3 py-2"
+                  onClick={() => setToggleMenu((prev) => !prev)}
+                >
+                  Blog
                 </p>
               </Link>
               <Link
@@ -129,7 +144,7 @@ const Nav = () => {
                   Contact
                 </p>
               </Link>
-              <Link
+              {!token ?  (<Link
                 href="/signin"
                 className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
               >
@@ -139,7 +154,19 @@ const Nav = () => {
                 >
                   Sign in
                 </p>
+              </Link>) : (
+                <Link
+                href="/user"
+                className="hover:bg-gray-700 hover:text-white w-full text-center rounded-md"
+              >
+                <p
+                  className="px-3 py-2"
+                  onClick={() => setToggleMenu((prev) => !prev)}
+                >
+                  Dash Board
+                </p>
               </Link>
+              )}
             </div>
           </div>
         )}

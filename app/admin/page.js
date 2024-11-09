@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { MdOutlineCardMembership } from "react-icons/md";
 import { HiStatusOnline } from "react-icons/hi";
 import { WiSunrise } from "react-icons/wi";
@@ -9,10 +10,56 @@ import { TiWeatherNight } from "react-icons/ti";
 import { WiDaySunnyOvercast } from "react-icons/wi";
 import { LuMoreVertical } from "react-icons/lu";
 import AdminTable from "./AdminTable";
+import { useRouter } from "next/navigation";
+import { Toaster, toast } from 'sonner'
+import axios from "axios";
+import { IoMdArrowDropright } from "react-icons/io";
+import { motion } from "framer-motion"
+import WorkoutCard from "./WorkoutCard";
+
 
 const page = () => {
+  const [users, setUsers] = useState([]);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    toast.success("Signed out successful")
+
+    localStorage.removeItem("token");
+    
+    setTimeout(() => {
+      router.push("/");
+    }, 1800);
+    
+  
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          toast.error("Unauthorized. Please log in.");
+          router.push('/signin');
+          return;
+        }
+
+        const response = await axios.get('http://localhost:2101/user/users', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        toast.error("Failed to fetch users. Check your connection or permissions.");
+      }
+    };
+
+    fetchUsers();
+  }, [router]);
+
   return (
     <div className="w-5/6 mx-auto mt-10">
+      <Toaster position="top-right" richColors />
       <div className="lg:flex gap-5">
         <div className="">
           <p className="text-3xl font-semibold">
@@ -24,7 +71,7 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <MdOutlineCardMembership className="text-black" />
               </div>
-              <p className="text-xl font-semibold mt-4">2306</p>
+              <p className="text-xl font-semibold mt-4">{users.length}</p>
               <p className="text-sm">Total Customers</p>
               <p className="text-green-600 mt-4">100%</p>
             </div>
@@ -92,58 +139,41 @@ const page = () => {
           </div>
         </div>
 
-        <div className="rounded-xl border lg:w-3/12 mt-10 lg:mt-0 px-4 py-4 border-gray-600 bg-gray-950">
-          <div className="border-b border-red-800 pb-3 flex justify-between items-center">
-            <div className="bg-white rounded-full px-1 py-1">
-              <IoMdFitness className="text-black" />
-            </div>
-            <p>Work-Out Plans</p>
-            <LuMoreVertical />
-          </div>
-
-          <div className="mt-3 flex gap-3 items-center">
-            <div className="px-6 py-5 border bg-white text-black rounded-full w-fit">
-              <p>09</p>
-            </div>
-            <div>
-              <p className="text-sm">Thurs | Sept</p>
-              <p className="text-lg font-semibold -mt-1">Leg Day</p>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="">
-              {/* <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
-              </div> */}
-              <p className="text-right">Jumping Jacks x3</p>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="">
-              {/* <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
-              </div> */}
-              <p className="text-right">Bench Press x5</p>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="">
-              {/* <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
-              </div> */}
-              <p className="text-right">High Press Squats x10</p>
-            </div>
-          </div>
-        </div>
+        <WorkoutCard/>
       </div>
 
-      <div className="lg:mt-4 mt-10">
+      <div className="lg:mt-4 mt-10 lg:flex">
+        <div>
         <p className="text-2xl font-semibold">
           Fitfam <span className="text-red-600 italic">Details</span>
         </p>
 
         <div className="mt-5">
-          <AdminTable/>
+          <AdminTable users={users}/>
+        </div>
+        </div>
+
+        <div className="lg:mt-4 mt-10 lg:w-4/12 lg:flex justify-center items-center">
+        <div>
+          
+            <motion.p
+              whileTap={{ scale: 0.7 }}
+              className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+            >
+              Change Password <IoMdArrowDropright className="text-red-600" />
+            </motion.p>
+          
+
+          
+            <motion.p
+              whileTap={{ scale: 0.7 }}
+              onClick={handleLogout}
+              className="px-5 py-2 bg-white w-fit flex font-semibold items-center mt-5 gap-1 text-black rounded-xl cursor-pointer"
+            >
+              Log Out <IoMdArrowDropright className="text-red-600" />
+            </motion.p>
+          
+          </div>
         </div>
       </div>
     </div>

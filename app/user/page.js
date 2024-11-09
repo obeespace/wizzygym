@@ -15,13 +15,27 @@ import { LuMoreVertical } from "react-icons/lu";
 import { IoMdArrowDropright } from "react-icons/io";
 import { IoCardOutline } from "react-icons/io5";
 import jwt_decode from "jsonwebtoken";
+import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Toaster, toast } from 'sonner'
 
 const page = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [userInfo, setUserInfo] = useState("");
   const router = useRouter();
+
+  const handleLogout = () => {
+    toast.success("Signed out successful")
+
+    localStorage.removeItem("token");
+    
+    setTimeout(() => {
+      router.push("/");
+    }, 1800);
+    
+  
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -61,6 +75,7 @@ const page = () => {
 
   return (
     <div className="w-5/6 mx-auto mt-10">
+      <Toaster position="top-right" richColors />
       <div className="lg:flex gap-5">
         <div className="">
           <p className="text-3xl font-semibold">
@@ -72,7 +87,13 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <MdOutlineCardMembership className="text-black" />
               </div>
-              <p className="text-xl font-semibold mt-4 text-green-600">
+              <p
+                className={`text-xl font-semibold mt-4 ${
+                  userInfo.subscription === "Active"
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
                 {userInfo.subscription}
               </p>
               <div className="">
@@ -311,6 +332,29 @@ const page = () => {
               <p>7 Days</p>
               <p>N8,000</p>
             </div>
+          </div>
+        </div>
+
+        <div className="lg:mt-4 mt-10 lg:w-4/12 lg:flex justify-center items-center">
+        <div>
+          <Link href="user">
+            <motion.p
+              whileTap={{ scale: 0.7 }}
+              className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+            >
+              Change Password <IoMdArrowDropright className="text-red-600" />
+            </motion.p>
+          </Link>
+
+          
+            <motion.p
+              whileTap={{ scale: 0.7 }}
+              onClick={handleLogout}
+              className="px-5 py-2 bg-white w-fit flex font-semibold items-center mt-5 gap-1 text-black rounded-xl cursor-pointer"
+            >
+              Log Out <IoMdArrowDropright className="text-red-600" />
+            </motion.p>
+          
           </div>
         </div>
       </div>
