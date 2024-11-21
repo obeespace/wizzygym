@@ -19,11 +19,18 @@ import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from 'sonner'
+import WorkoutCard from "../admin/WorkoutCard";
+import PlanModal from "../components/PlanModal";
 
 const page = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [showplan, setShowPlan] = useState(false);
   const router = useRouter();
+
+  const handleShowPlan = () => {
+    setShowPlan(true)
+  }
 
   const handleLogout = () => {
     toast.success("Signed out successful")
@@ -170,48 +177,7 @@ const page = () => {
           </div>
         </div>
 
-        <div className="rounded-xl border lg:w-3/12 mt-10 lg:mt-0 px-4 py-4 border-gray-600 bg-gray-950">
-          <div className="border-b border-red-800 pb-3 flex gap-3 items-center">
-            <div className="bg-white rounded-full px-1 py-1">
-              <IoMdFitness className="text-black" />
-            </div>
-            <p>Work-Out Plans</p>
-          </div>
-
-          <div className="mt-3 flex gap-3 items-center">
-            <div className="px-6 py-5 border bg-white text-black rounded-full w-fit">
-              <p>09</p>
-            </div>
-            <div>
-              <p className="text-sm">Thurs | Sept</p>
-              <p className="text-lg font-semibold -mt-1">Leg Day</p>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="">
-              {/* <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
-              </div> */}
-              <p className="text-right">Jumping Jacks x3</p>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="">
-              {/* <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
-              </div> */}
-              <p className="text-right">Bench Press x5</p>
-            </div>
-          </div>
-          <div className="mt-5">
-            <div className="">
-              {/* <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
-              </div> */}
-              <p className="text-right">High Press Squats x10</p>
-            </div>
-          </div>
-        </div>
+        <WorkoutCard/>
       </div>
 
       <div className="lg:flex gap-5">
@@ -301,6 +267,8 @@ const page = () => {
           </div>
         </div>
 
+
+        {/* payment portal */}
         <div className="rounded-xl border lg:w-4/12 mt-5  border-gray-600">
           <div className="bg-gray-950 shadow-gray-600 shadow-md rounded-xl px-4 py-4">
             <div className="flex items-center gap-3">
@@ -313,9 +281,10 @@ const page = () => {
               5562 xxxx xxxx xxxx
             </p>
             <div className="flex justify-end items-center mt-5">
-              <p className="flex gap-2">Buy Plan</p>
+              <p className="flex gap-2" onClick={handleShowPlan} >Buy Plan</p>
               <IoMdArrowDropright className="text-red-700" />
             </div>
+            {showplan && <PlanModal/>}
           </div>
 
           <div className="px-4 py-3">

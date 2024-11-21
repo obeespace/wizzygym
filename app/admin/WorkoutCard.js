@@ -82,23 +82,23 @@ const WorkoutCard = ({ workout }) => {
   return (
     <div className="rounded-xl border lg:w-3/12 mt-10 lg:mt-0 px-4 py-4 border-gray-600 bg-gray-950">
       <div className="border-b border-red-800 pb-3 flex justify-between items-center">
-        <div className="bg-white rounded-full px-1 py-1">
+        <div className="flex gap-3"><div className="bg-white rounded-full px-1 py-1">
           <IoMdFitness className="text-black" />
         </div>
-        <p>Work-Out Plans</p>
-        <LuMoreVertical />
+        <p>Home Work-Out Plans</p></div>
+        {localStorage.getItem('email') === "obeewon20@gmail.com" ? <LuMoreVertical /> : <></>}
       </div>
 
       <div className="mt-3 flex gap-3 items-center">
         <div className="px-6 py-5 border bg-white text-black rounded-full w-fit">
-          <p>{dayOfMonth}th</p>
+          <p>{dayOfMonth}</p>
         </div>
         <div>
           <p className="text-sm">
             {dayName} | {month}
           </p>
           <p className="text-lg font-semibold -mt-1">
-            {categoriesForToday.join(" & ")} Day
+            {categoriesForToday.join(" & ")}
           </p>
         </div>
       </div>
