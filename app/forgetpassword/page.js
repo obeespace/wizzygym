@@ -140,7 +140,7 @@ const page = () => {
           onClick={handlePasswordReset}
           className="px-7 py-3 mt-7 bg-white flex font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
         >
-          Reset Password<IoMdArrowDropright className="text-red-600"/>
+          {}<IoMdArrowDropright className="text-red-600"/>
         </motion.p>
         </div>
       </div>

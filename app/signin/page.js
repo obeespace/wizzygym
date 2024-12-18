@@ -93,7 +93,7 @@ const page = () => {
         />
 
         <div className='flex justify-between text-sm -mt-2'>
-        <p>Forget Password?</p>
+        <Link href='/forgetpassword'><p>Forget Password?</p></Link>
         <Link href='/signup'><p className='hover:underline'>New?..Sign up</p></Link>
         </div>
 

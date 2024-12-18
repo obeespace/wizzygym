@@ -284,7 +284,7 @@ const page = () => {
               <p className="flex gap-2" onClick={handleShowPlan} >Buy Plan</p>
               <IoMdArrowDropright className="text-red-700" />
             </div>
-            {showplan && <PlanModal/>}
+            {showplan && <PlanModal />}
           </div>
 
           <div className="px-4 py-3">
@@ -306,7 +306,7 @@ const page = () => {
 
         <div className="lg:mt-4 mt-10 lg:w-4/12 lg:flex justify-center items-center">
         <div>
-          <Link href="user">
+          <Link href='/forgetpassword'>
             <motion.p
               whileTap={{ scale: 0.7 }}
               className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"

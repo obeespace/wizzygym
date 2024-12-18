@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdArrowDropright } from "react-icons/io";
+import { Toaster, toast } from 'sonner'
+
 
 const Nav = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -18,7 +20,7 @@ const Nav = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(null);
-    alert("You have been logged out due to inactivity.");
+    toast.info("You have been logged out due to inactivity.");
   };
 
   // Function to reset the inactivity timer
@@ -61,6 +63,7 @@ const Nav = () => {
 
   return (
     <div className="w-5/6 mx-auto py-5">
+      <Toaster position="top-right" richColors />
       {/* Desktop Header */}
       <div className="hidden lg:flex justify-between items-center">
         <div>
