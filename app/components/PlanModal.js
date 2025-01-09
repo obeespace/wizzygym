@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import PaymentForm from './PaymentForm';
+import VerifyPayment from './VerifyPayment';
 
 const PlanModal = () => {
     const [showModal, setshowModal] = useState(false);
@@ -13,6 +14,7 @@ const PlanModal = () => {
           <div className="bg-gray-950 p-6 rounded-lg shadow-lg w-7/12 mx-auto">
           <div></div>
           <PaymentForm/>
+          <VerifyPayment />
           </div>
         </div>
   )

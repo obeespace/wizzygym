@@ -96,7 +96,7 @@ const page = () => {
               </div>
               <p
                 className={`text-xl font-semibold mt-4 ${
-                  userInfo.subscription === "Active"
+                  userInfo.subscription === "Active" || "active"
                     ? "text-green-600"
                     : "text-red-600"
                 }`}
