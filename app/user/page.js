@@ -54,10 +54,10 @@ const page = () => {
 
         // Fetch user data from backend using the ID
         axios
-          .get(`http://localhost:2101/user/findUser/${userId}`, {
+          .get(`api/auth/findUser/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`, // Pass token to backend for authorization
-            },
+            }, 
           })
           .then((res) => {
             setUserInfo(res.data);

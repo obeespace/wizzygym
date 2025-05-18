@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import { IoMdArrowDropright } from "react-icons/io";
-import Link from 'next/link';
 import { Toaster, toast } from 'sonner'
 import { useRouter } from 'next/navigation';
 import axios from "axios";
@@ -20,7 +19,7 @@ const page = () => {
   
     const handleSendCode = async () => {
       try {
-        await axios.post('http://localhost:2101/user/forgot-password', { email });
+        await axios.post('api/auth/forgetPassword', { email });
         toast.success('Reset code sent to your email')
         setTimeout(() => {
           setshowCodeTab(true)
@@ -33,7 +32,7 @@ const page = () => {
   
     const handleVerifyCode = async () => {
       try {
-        const response = await axios.post('http://localhost:2101/user/verify-reset-code', { email, resetCode });
+        const response = await axios.post('api/auth/verifyResetCode', { email, resetCode });
         if (response.data.verified) {
           setCodeVerified(true);
         toast.success('Verification Sucessful')
@@ -46,7 +45,7 @@ const page = () => {
   
     const handlePasswordReset = async () => {
       try {
-        await axios.post('http://localhost:2101/user/reset-password', { email, newPassword });
+        await axios.post('api/auth/resetPassword', { email, newPassword });
         toast.success('Password successfully changed');
         setTimeout(() => {
           router.push("/signin");

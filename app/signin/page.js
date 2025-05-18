@@ -29,7 +29,7 @@ const page = () => {
   
     // Use toast.promise to handle the axios request
     const promise = axios
-      .post("http://localhost:2101/user/signin", data)
+      .post("/api/auth/signin", data)
       .then((res) => {
         // Handle successful login, store token, navigate, etc.
         localStorage.setItem("token", res.data.token);

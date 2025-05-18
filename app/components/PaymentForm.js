@@ -23,11 +23,11 @@ const PaymentForm = () => {
   };
 
   return (
-    <div>
-      <h2>Make a Payment</h2>
+    <div className="">
+      <h2 className="text-center mb-3">Make Payment</h2>
       <form onSubmit={handlePayment}>
         <input
-        className="text-black"
+        className="text-black mb-2 rounded-sm px-2 py-1"
           type="email"
           placeholder="Email"
           value={email}
@@ -36,13 +36,13 @@ const PaymentForm = () => {
         />
         <input
           type="number"
-          className="text-black"
+          className="text-black mb-2 rounded-sm px-2 py-1"
           placeholder="Amount (NGN)"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           required
         />
-        <button type="submit">Pay Now</button>
+        <button className="ml-3" type="submit">Pay Now</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {paymentUrl && (

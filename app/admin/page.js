@@ -44,7 +44,7 @@ const page = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:2101/user/users', {
+        const response = await axios.get('api/auth/allUsers', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);
@@ -156,12 +156,13 @@ const page = () => {
         <div className="lg:mt-4 mt-10 lg:w-4/12 lg:flex justify-center items-center">
         <div>
           
-            <motion.p
+            <motion.a
+            href="forgetpassword"
               whileTap={{ scale: 0.7 }}
               className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
             >
               Change Password <IoMdArrowDropright className="text-red-600" />
-            </motion.p>
+            </motion.a>
           
 
           

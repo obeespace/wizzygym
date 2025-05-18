@@ -18,7 +18,7 @@ const Footer = () => {
             <p>Training</p>
             <p>Contact</p>
           </div>
-          <div className="flex flex-col gap-2 -mt-14 lg:mt-0">
+          <div className="flex flex-col gap-2 -mt-16 lg:mt-0">
             <p className="font-semibold text-red-600">Socials</p>
             <p>Instagram</p>
             <p>TikTok</p>

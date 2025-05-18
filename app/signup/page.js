@@ -52,7 +52,7 @@ const page = () => {
     //   });
 
       const promise = axios
-    .post("http://localhost:2101/user/signup", data)
+    .post("/api/auth/signup", data)
     .then((res) => {
       // Successful sign-up
       return { name: "Sign-up successful" };

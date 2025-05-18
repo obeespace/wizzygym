@@ -47,7 +47,7 @@ const WorkoutCard = ({ workout }) => {
           return;
         }
 
-        const response = await axios.get("http://localhost:2101/user/workouts", {
+        const response = await axios.get("api/auth/getAllWorkout", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data); // Set the workout data in state
@@ -86,7 +86,7 @@ const WorkoutCard = ({ workout }) => {
           <IoMdFitness className="text-black" />
         </div>
         <p>Home Work-Out Plans</p></div>
-        {localStorage.getItem('email') === "obeewon20@gmail.com" ? <LuMoreVertical /> : <></>}
+        {/* {localStorage.getItem('email') === "obeewon20@gmail.com" ? <LuMoreVertical /> : <></>} */}
       </div>
 
       <div className="mt-3 flex gap-3 items-center">
