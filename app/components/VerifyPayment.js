@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const VerifyPayment = () => {
+const VerifyPayment = ({ onPaymentVerified }) => {
   const [reference, setReference] = useState("");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
@@ -12,8 +12,9 @@ const VerifyPayment = () => {
     setData(null);
 
     try {
-      const response = await axios.get(`http://localhost:2101/user/verify/${reference}`);
-      setData(response.data.data);
+      const response = await axios.post(`/api/auth/verifyPayment/${reference}`, { reference });
+      setData(response.data.user);
+      if (onPaymentVerified) onPaymentVerified(); // Refresh user info after verification
     } catch (err) {
       setError(err.response?.data?.error || "Failed to verify payment");
     }
@@ -37,9 +38,9 @@ const VerifyPayment = () => {
       {data && (
         <div>
           <h3>Payment Details</h3>
-          <p>Status: {data.status}</p>
-          <p>Amount: {data.amount / 100} NGN</p>
-          <p>Reference: {data.reference}</p>
+          <p>Status: {data.subscription}</p>
+          <p>Email: {data.email}</p>
+          <p>Reference: {reference}</p>
         </div>
       )}
     </div>

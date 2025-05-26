@@ -29,8 +29,12 @@ const page = () => {
   const router = useRouter();
 
   const handleShowPlan = () => {
-    setShowPlan(true)
-  }
+    setShowPlan(true);
+  };
+
+  const handleClosePlan = () => {
+    setShowPlan(false);
+  };
 
   const handleLogout = () => {
     toast.success("Signed out successful")
@@ -44,38 +48,27 @@ const page = () => {
   
   };
 
-  useEffect(() => {
+  const fetchUserInfo = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        // Decode the token to get user ID (adjust this if your token structure differs)
-        const decoded = jwt_decode.decode(token);
-        const userId = decoded.id;
-
         // Fetch user data from backend using the ID
-        axios
-          .get(`api/auth/findUser/${userId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`, // Pass token to backend for authorization
-            }, 
-          })
-          .then((res) => {
-            setUserInfo(res.data);
-          })
-          .catch((err) => {
-            console.error("Error fetching user data:", err);
-            // Redirect to login if unauthorized
-            if (err.response && err.response.status === 401) {
-              router.push("/signin");
-            }
-          });
+        const userId = jwt_decode.decode(token).id;
+        const res = await axios.get(`api/auth/findUser/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUserInfo(res.data);
       } catch (error) {
         console.error("Token decoding error:", error);
         router.push("/signin");
       }
     } else {
-      router.push("/signin"); // Redirect to login if no token is found
+      router.push("/signin");
     }
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
   }, [router]);
 
   if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
@@ -280,11 +273,11 @@ const page = () => {
             <p className="font-semibold text-2xl mt-5 text-center">
               5562 xxxx xxxx xxxx
             </p>
-            <div className="flex justify-end items-center mt-5">
+            <div className="flex justify-end items-center cursor-pointer mt-5">
               <p className="flex gap-2" onClick={handleShowPlan} >Buy Plan</p>
               <IoMdArrowDropright className="text-red-700" />
             </div>
-            {showplan && <PlanModal />}
+            {showplan && <PlanModal onClose={handleClosePlan} onPaymentVerified={fetchUserInfo} />}
           </div>
 
           <div className="px-4 py-3">

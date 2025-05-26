@@ -12,7 +12,7 @@ const PaymentForm = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:2101/user/initialize", {
+      const response = await axios.post("api/auth/initializePayment", {
         email,
         amount: Number(amount) * 100, // Convert to kobo
       });
