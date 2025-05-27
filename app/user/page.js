@@ -67,11 +67,28 @@ const page = () => {
     }
   };
 
+  // Check if subscription expired and update status and trainer accordingly
+  useEffect(() => {
+    if (userInfo && userInfo.serviceEndDate) {
+      const now = new Date();
+      const endDate = new Date(userInfo.serviceEndDate);
+      if (endDate < now && userInfo.subscription === "Active") {
+        setUserInfo((prev) => ({
+          ...prev,
+          subscription: "Disactivated",
+          trainer: "Disactivated",
+        }));
+      }
+    }
+  }, [userInfo]);
+
   useEffect(() => {
     fetchUserInfo();
   }, [router]);
 
   if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
+
+  console.log('userInfo:', userInfo); // Debug: check what is coming from backend
 
   return (
     <div className="w-5/6 mx-auto mt-10">
@@ -89,7 +106,7 @@ const page = () => {
               </div>
               <p
                 className={`text-xl font-semibold mt-4 ${
-                  userInfo.subscription === "Active" || "active"
+                  userInfo.subscription === "Active"
                     ? "text-green-600"
                     : "text-red-600"
                 }`}
@@ -106,7 +123,13 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <HiStatusOnline className="text-black" />
               </div>
-              <p className="text-xl font-semibold mt-4">{userInfo.trainer}</p>
+              <p className="text-xl font-semibold mt-4">
+                {userInfo.trainer && userInfo.trainer !== "New User" && userInfo.trainer !== "Disactivated"
+                  ? userInfo.trainer
+                  : userInfo.subscription === "Active"
+                    ? "Assigned Trainer"
+                    : "Disactivated"}
+              </p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
                 <p className="text-red-600 mt-4">change Trainer</p>
@@ -254,7 +277,11 @@ const page = () => {
                 <div className="bg-white rounded-full px-1 py-1">
                   <TiWeatherNight className="text-black" />
                 </div>
-                <p>Service End Date</p>
+                <p>
+                  {userInfo.serviceEndDate
+                    ? `Sub End Date: ${new Date(userInfo.serviceEndDate).toLocaleDateString()}`
+                    : "Subscription End Date"}
+                </p>
               </div>
             </div>
           </div>

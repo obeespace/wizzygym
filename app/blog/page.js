@@ -1,8 +1,9 @@
+"use client"
 import React from 'react'
 
 const mission = () => {
   return (
-    <div>mission</div>
+    <div></div>
   )
 }
 

@@ -35,7 +35,28 @@ export async function POST(req) {
         return NextResponse.json({ error: "User not found" }, { status: 404 });
       }
 
+      // Determine plan duration from amount
+      let durationDays = 0;
+      if (transaction.amount === 2000 * 100) durationDays = 1;
+      else if (transaction.amount === 15000 * 100) durationDays = 30;
+      else if (transaction.amount === 40000 * 100) durationDays = 90;
+      else durationDays = 1; // fallback
+
+      // If user already has an active subscription, extend it
+      const now = new Date();
+      let baseDate = now;
+      if (user.serviceEndDate && new Date(user.serviceEndDate) > now) {
+        baseDate = new Date(user.serviceEndDate);
+      }
+      user.serviceEndDate = new Date(baseDate.getTime() + durationDays * 24 * 60 * 60 * 1000);
       user.subscription = "Active";
+
+      // Assign a random trainer if user is new or subscription is being renewed
+      if (!user.trainer || new Date(user.serviceEndDate).getTime() === user.serviceEndDate.getTime() || new Date(user.serviceEndDate) <= now) {
+        const trainers = ["Wisdom", "Jon", "Panther"];
+        user.trainer = trainers[Math.floor(Math.random() * trainers.length)];
+      }
+
       await user.save();
 
       transaction.status = "success";

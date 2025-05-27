@@ -4,7 +4,8 @@ import PaymentForm from "./PaymentForm";
 import VerifyPayment from "./VerifyPayment";
 
 const PlanModal = ({ onClose, onPaymentVerified }) => {
-  
+  const [reference, setReference] = useState("");
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-gray-950 p-6 shadow-md rounded-lg border border-gray-600 lg:w-7/12 w-5/6 mx-auto relative">
@@ -16,8 +17,11 @@ const PlanModal = ({ onClose, onPaymentVerified }) => {
         >
           &times;
         </button>
-        <PaymentForm />
-        <VerifyPayment onPaymentVerified={onPaymentVerified} />
+        {reference ? (
+          <VerifyPayment reference={reference} onPaymentVerified={onPaymentVerified} />
+        ) : (
+          <PaymentForm onPaymentInitialized={setReference} />
+        )}
       </div>
     </div>
   );
