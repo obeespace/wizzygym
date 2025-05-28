@@ -21,11 +21,13 @@ import { useRouter } from "next/navigation";
 import { Toaster, toast } from 'sonner'
 import WorkoutCard from "../admin/WorkoutCard";
 import PlanModal from "../components/PlanModal";
+import html2canvas from "html2canvas";
 
 const page = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [userInfo, setUserInfo] = useState("");
   const [showplan, setShowPlan] = useState(false);
+  const [showReceipt, setShowReceipt] = useState(false);
   const router = useRouter();
 
   const handleShowPlan = () => {
@@ -86,6 +88,19 @@ const page = () => {
     fetchUserInfo();
   }, [router]);
 
+  const handleShowReceipt = () => setShowReceipt(true);
+  const handleCloseReceipt = () => setShowReceipt(false);
+
+  const handleDownloadReceipt = async () => {
+    const element = document.getElementById("receipt-card");
+    if (!element) return;
+    const canvas = await html2canvas(element);
+    const link = document.createElement("a");
+    link.download = `wizzygym-receipt-${userInfo.nickname || "user"}.png`;
+    link.href = canvas.toDataURL();
+    link.click();
+  };
+
   if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
 
   console.log('userInfo:', userInfo); // Debug: check what is coming from backend
@@ -115,7 +130,15 @@ const page = () => {
               </p>
               <div className="">
                 <p className="text-sm">Subscription status</p>
-                <p className="text-green-600 mt-4">See Plans</p>
+                {userInfo.subscription === "Active" ? (
+                  <p className="text-green-600 mt-4 cursor-pointer" onClick={handleShowReceipt}>
+                    Show Payment
+                  </p>
+                ) : (
+                  <p className="text-blue-600 mt-4 cursor-pointer" onClick={handleShowPlan}>
+                    See Plans
+                  </p>
+                )}
               </div>
             </div>
 
@@ -347,6 +370,36 @@ const page = () => {
           </div>
         </div>
       </div>
+
+      {showReceipt && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+    <div className="bg-gray-900 rounded-xl p-6 w-full max-w-xs relative">
+      <button onClick={handleCloseReceipt} className="absolute top-2 right-2 text-white text-3xl">&times;</button>
+      <div id="receipt-card" className="flex flex-col items-center rounded-xl bg-gray-800 p-5 shadow-lg">
+        <div className="flex justify-between w-full mb-2">
+          <span className="text-3xl">🏋️‍♂️</span>
+          <span className="text-3xl">⬇️</span>
+          <span className="text-3xl">🏋️‍♂️</span>
+        </div>
+        <h2 className="text-lg font-bold text-white mb-1">FITNESS GYM</h2>
+        <p className="text-gray-300 text-sm mb-1">{userInfo.email}</p>
+        <p className="text-xl font-semibold text-white mb-2">{userInfo.nickname}</p>
+        <div className={`rounded-full px-3 py-1 mb-2 ${userInfo.subscription === "Active" ? "bg-green-700" : "bg-red-700"}`}>
+          <span className="text-white font-semibold">{userInfo.subscription === "Active" ? "Active Subscription" : "Disactivated"}</span>
+        </div>
+        <div className="flex justify-between w-full text-xs text-gray-400 mb-1">
+          <span>Start Date</span>
+          <span>End Date</span>
+        </div>
+        <div className="flex justify-between w-full text-base text-white font-mono">
+          <span>{userInfo.serviceStartDate ? new Date(userInfo.serviceStartDate).toLocaleDateString() : "-"}</span>
+          <span>{userInfo.serviceEndDate ? new Date(userInfo.serviceEndDate).toLocaleDateString() : "-"}</span>
+        </div>
+      </div>
+      <button onClick={handleDownloadReceipt} className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold">Download</button>
+    </div>
+  </div>
+)}
     </div>
   );
 };
