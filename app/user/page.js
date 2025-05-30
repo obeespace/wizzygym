@@ -18,7 +18,7 @@ import jwt_decode from "jsonwebtoken";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 import WorkoutCard from "../admin/WorkoutCard";
 import PlanModal from "../components/PlanModal";
 import html2canvas from "html2canvas";
@@ -39,15 +39,13 @@ const page = () => {
   };
 
   const handleLogout = () => {
-    toast.success("Signed out successful")
+    toast.success("Signed out successful");
 
     localStorage.removeItem("token");
-    
+
     setTimeout(() => {
       router.push("/");
     }, 1800);
-    
-  
   };
 
   const fetchUserInfo = async () => {
@@ -103,7 +101,7 @@ const page = () => {
 
   if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
 
-  console.log('userInfo:', userInfo); // Debug: check what is coming from backend
+  // console.log('userInfo:', userInfo); // Debug: check what is coming from backend
 
   return (
     <div className="w-5/6 mx-auto mt-10">
@@ -131,11 +129,17 @@ const page = () => {
               <div className="">
                 <p className="text-sm">Subscription status</p>
                 {userInfo.subscription === "Active" ? (
-                  <p className="text-green-600 mt-4 cursor-pointer" onClick={handleShowReceipt}>
+                  <p
+                    className="text-green-600 mt-4 cursor-pointer"
+                    onClick={handleShowReceipt}
+                  >
                     Show Payment
                   </p>
                 ) : (
-                  <p className="text-blue-600 mt-4 cursor-pointer" onClick={handleShowPlan}>
+                  <p
+                    className="text-blue-600 mt-4 cursor-pointer"
+                    onClick={handleShowPlan}
+                  >
                     See Plans
                   </p>
                 )}
@@ -147,11 +151,13 @@ const page = () => {
                 <HiStatusOnline className="text-black" />
               </div>
               <p className="text-xl font-semibold mt-4">
-                {userInfo.trainer && userInfo.trainer !== "New User" && userInfo.trainer !== "Disactivated"
+                {userInfo.trainer &&
+                userInfo.trainer !== "New User" &&
+                userInfo.trainer !== "Disactivated"
                   ? userInfo.trainer
                   : userInfo.subscription === "Active"
-                    ? "Assigned Trainer"
-                    : "Disactivated"}
+                  ? "Assigned Trainer"
+                  : "Disactivated"}
               </p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
@@ -216,7 +222,7 @@ const page = () => {
           </div>
         </div>
 
-        <WorkoutCard/>
+        <WorkoutCard />
       </div>
 
       <div className="lg:flex gap-5">
@@ -302,14 +308,15 @@ const page = () => {
                 </div>
                 <p>
                   {userInfo.serviceEndDate
-                    ? `Sub End Date: ${new Date(userInfo.serviceEndDate).toLocaleDateString()}`
+                    ? `Sub End Date: ${new Date(
+                        userInfo.serviceEndDate
+                      ).toLocaleDateString()}`
                     : "Subscription End Date"}
                 </p>
               </div>
             </div>
           </div>
         </div>
-
 
         {/* payment portal */}
         <div className="rounded-xl border lg:w-4/12 mt-5  border-gray-600">
@@ -324,10 +331,17 @@ const page = () => {
               5562 xxxx xxxx xxxx
             </p>
             <div className="flex justify-end items-center cursor-pointer mt-5">
-              <p className="flex gap-2" onClick={handleShowPlan} >Buy Plan</p>
+              <p className="flex gap-2" onClick={handleShowPlan}>
+                Buy Plan
+              </p>
               <IoMdArrowDropright className="text-red-700" />
             </div>
-            {showplan && <PlanModal onClose={handleClosePlan} onPaymentVerified={fetchUserInfo} />}
+            {showplan && (
+              <PlanModal
+                onClose={handleClosePlan}
+                onPaymentVerified={fetchUserInfo}
+              />
+            )}
           </div>
 
           <div className="px-4 py-3">
@@ -348,17 +362,16 @@ const page = () => {
         </div>
 
         <div className="lg:mt-4 mt-10 lg:w-4/12 lg:flex justify-center items-center">
-        <div>
-          <Link href='/forgetpassword'>
-            <motion.p
-              whileTap={{ scale: 0.7 }}
-              className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
-            >
-              Change Password <IoMdArrowDropright className="text-red-600" />
-            </motion.p>
-          </Link>
+          <div>
+            <Link href="/forgetpassword">
+              <motion.p
+                whileTap={{ scale: 0.7 }}
+                className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+              >
+                Change Password <IoMdArrowDropright className="text-red-600" />
+              </motion.p>
+            </Link>
 
-          
             <motion.p
               whileTap={{ scale: 0.7 }}
               onClick={handleLogout}
@@ -366,40 +379,74 @@ const page = () => {
             >
               Log Out <IoMdArrowDropright className="text-red-600" />
             </motion.p>
-          
           </div>
         </div>
       </div>
 
       {showReceipt && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-    <div className="bg-gray-900 rounded-xl p-6 w-full max-w-xs relative">
-      <button onClick={handleCloseReceipt} className="absolute top-2 right-2 text-white text-3xl">&times;</button>
-      <div id="receipt-card" className="flex flex-col items-center rounded-xl bg-gray-800 p-5 shadow-lg">
-        <div className="flex justify-between w-full mb-2">
-          <span className="text-3xl">🏋️‍♂️</span>
-          <span className="text-3xl">⬇️</span>
-          <span className="text-3xl">🏋️‍♂️</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+          <div className="border border-gray-400 rounded-xl p-6 w-full max-w-xs relative">
+            <button
+              onClick={handleCloseReceipt}
+              className="absolute top-1 right-2 text-white text-3xl"
+            >
+              &times;
+            </button>
+            <div
+              id="receipt-card"
+              className="flex flex-col items-center rounded-xl bg-gray-900 p-5 shadow-lg"
+            >
+              <div className="flex justify-between w-full mb-2">
+                <span className="text-3xl">🏋️‍♂️</span>
+
+                <span className="text-3xl">🏋️‍♂️</span>
+              </div>
+              <h2 className="text-lg font-bold text-white mb-1">
+                Wizzy Pro Gym
+              </h2>
+              <p className="text-gray-300 text-sm mb-1">{userInfo.email}</p>
+              <p className="text-xl font-semibold text-white mb-2">
+                {userInfo.nickname}
+              </p>
+              
+                <p className="text-green-400 font-semibold">
+                  {userInfo.subscription === "Active"
+                    ? "Active Subscription"
+                    : "Disactivated"}
+                </p>
+              
+
+              <div className="flex justify-between w-full text-xs text-gray-400 mt-2">
+                <span>Start Date</span>
+                <span>End Date</span>
+              </div>
+              <div className="flex justify-between w-full text-base text-white font-mono">
+                <span>
+                  {userInfo.serviceStartDate
+                    ? new Date(userInfo.serviceStartDate).toLocaleDateString()
+                    : userInfo.createdAt
+                    ? new Date(userInfo.createdAt).toLocaleDateString()
+                    : "-"}
+                </span>
+                <span>
+                  {userInfo.serviceEndDate
+                    ? new Date(userInfo.serviceEndDate).toLocaleDateString()
+                    : "-"}
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center mt-3">
+              <motion.p
+                onClick={handleDownloadReceipt}
+                whileTap={{ scale: 0.7 }}
+                className="px-5 py-2 bg-white flex w-fit font-semibold items-center gap-1 text-black rounded-xl cursor-pointer"
+              >
+                Download <IoMdArrowDropright className="text-red-600" />
+              </motion.p>
+            </div>
+          </div>
         </div>
-        <h2 className="text-lg font-bold text-white mb-1">FITNESS GYM</h2>
-        <p className="text-gray-300 text-sm mb-1">{userInfo.email}</p>
-        <p className="text-xl font-semibold text-white mb-2">{userInfo.nickname}</p>
-        <div className={`rounded-full px-3 py-1 mb-2 ${userInfo.subscription === "Active" ? "bg-green-700" : "bg-red-700"}`}>
-          <span className="text-white font-semibold">{userInfo.subscription === "Active" ? "Active Subscription" : "Disactivated"}</span>
-        </div>
-        <div className="flex justify-between w-full text-xs text-gray-400 mb-1">
-          <span>Start Date</span>
-          <span>End Date</span>
-        </div>
-        <div className="flex justify-between w-full text-base text-white font-mono">
-          <span>{userInfo.serviceStartDate ? new Date(userInfo.serviceStartDate).toLocaleDateString() : "-"}</span>
-          <span>{userInfo.serviceEndDate ? new Date(userInfo.serviceEndDate).toLocaleDateString() : "-"}</span>
-        </div>
-      </div>
-      <button onClick={handleDownloadReceipt} className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold">Download</button>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

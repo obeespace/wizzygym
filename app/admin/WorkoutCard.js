@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import { Toaster, toast } from 'sonner';
 import axios from "axios";
 
-const WorkoutCard = ({ workout }) => {
+const WorkoutCard = ({ workout, userId }) => {
   const today = new Date();
-  const [users, setUsers] = useState([]); 
+  const [users, setUsers] = useState([]);
+  const [workoutPlan, setWorkoutPlan] = useState([]);
   const router = useRouter();
 
   // Arrays for short day and month names
@@ -50,8 +51,7 @@ const WorkoutCard = ({ workout }) => {
         const response = await axios.get("api/auth/getAllWorkout", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUsers(response.data); // Set the workout data in state
-        console.log(response.data);
+        setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
         toast.error("Failed to fetch users. Check your connection or permissions.");
@@ -61,23 +61,39 @@ const WorkoutCard = ({ workout }) => {
     fetchUsers();
   }, [router]);
 
-  // Filter the exercises by today's categories
-  const getRandomWorkouts = () => {
-    const selectedExercises = [];
-
-    categoriesForToday.forEach((category) => {
-      const exercises = users.filter((exercise) => exercise.category === category);
-      if (exercises.length > 0) {
-        // Randomly pick one exercise from each category
-        const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
-        selectedExercises.push(randomExercise);
-      }
-    });
-
-    return selectedExercises.slice(0, 3); // Ensure only 3 exercises are displayed
-  };
-
-  const workoutPlan = getRandomWorkouts(); // Generate today's workout plan
+  useEffect(() => {
+    if (users.length === 0) return;
+    // Get userId from props or fallback to localStorage (if needed)
+    let uid = userId;
+    if (!uid) {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const jwt_decode = require("jsonwebtoken");
+          uid = jwt_decode.decode(token).id;
+        }
+      } catch {}
+    }
+    const dateKey = today.toISOString().slice(0, 10); // YYYY-MM-DD
+    const storageKey = `workoutPlan_${uid || "nouser"}_${dateKey}`;
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      setWorkoutPlan(JSON.parse(saved));
+    } else {
+      // Generate new plan
+      const selectedExercises = [];
+      categoriesForToday.forEach((category) => {
+        const exercises = users.filter((exercise) => exercise.category === category);
+        if (exercises.length > 0) {
+          const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
+          selectedExercises.push(randomExercise);
+        }
+      });
+      const plan = selectedExercises.slice(0, 3);
+      setWorkoutPlan(plan);
+      localStorage.setItem(storageKey, JSON.stringify(plan));
+    }
+  }, [users]);
 
   return (
     <div className="rounded-xl border lg:w-3/12 mt-10 lg:mt-0 px-4 py-4 border-gray-600 bg-gray-950">
