@@ -17,9 +17,10 @@ import { IoMdArrowDropright } from "react-icons/io";
 import { motion } from "framer-motion"
 import WorkoutCard from "./WorkoutCard";
 
-
 const page = () => {
   const [users, setUsers] = useState([]);
+  const [trainerRequests, setTrainerRequests] = useState([]);
+  const [loadingRequests, setLoadingRequests] = useState(false);
   const router = useRouter();
 
   const handleLogout = () => {
@@ -56,6 +57,27 @@ const page = () => {
 
     fetchUsers();
   }, [router]);
+
+  useEffect(() => {
+    // Fetch trainer change requests for admin
+    const fetchRequests = async () => {
+      setLoadingRequests(true);
+      try {
+        const res = await axios.get("/api/auth/trainerChangeRequest");
+        setTrainerRequests(res.data);
+      } catch (e) {
+        setTrainerRequests([]);
+      }
+      setLoadingRequests(false);
+    };
+    fetchRequests();
+  }, []);
+
+  const handleTrainerRequestAction = async (userId, approve) => {
+    await axios.put("/api/auth/trainerChangeRequest", { userId, approve });
+    setTrainerRequests((prev) => prev.filter((r) => r.userId !== userId));
+    toast.success(approve ? "Trainer changed!" : "Request disapproved");
+  };
 
   return (
     <div className="w-5/6 mx-auto mt-10">
@@ -151,6 +173,29 @@ const page = () => {
         <div className="mt-5">
           <AdminTable users={users}/>
         </div>
+        {/* Trainer Change Requests */}
+        {loadingRequests ? (
+          <p className="text-white mt-5">Loading trainer change requests...</p>
+        ) : trainerRequests.length > 0 ? (
+          <div className="mt-8 border border-gray-700 rounded-xl p-4">
+            <h3 className="text-lg font-bold text-white mb-4">Trainer Change Requests</h3>
+            {trainerRequests.map((req, idx) => (
+              <div key={idx} className="mb-4 p-3 rounded bg-gray-900 flex flex-col lg:flex-row lg:items-center justify-between">
+                <div>
+                  <p className="text-white">User ID: <span className="font-mono">{req.userId}</span></p>
+                  <p className="text-white">Requested Trainer: <span className="text-red-400 font-semibold">{req.trainer}</span></p>
+                  <p className="text-white">Reason: {req.reason}</p>
+                </div>
+                <div className="flex gap-3 mt-3 lg:mt-0">
+                  <button onClick={() => handleTrainerRequestAction(req.userId, true)} className="px-4 py-2 bg-green-600 text-white rounded-xl font-semibold">Approve</button>
+                  <button onClick={() => handleTrainerRequestAction(req.userId, false)} className="px-4 py-2 bg-gray-500 text-white rounded-xl font-semibold">Disapprove</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-white mt-5">No trainer change requests.</p>
+        )}
         </div>
 
         <div className="lg:mt-4 mt-10 lg:w-4/12 lg:flex justify-center items-center">

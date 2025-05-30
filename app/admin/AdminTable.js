@@ -7,20 +7,20 @@ const BasicTable = ({ users }) => {
             <thead>
               <tr>
                 <th className="px-4 py-2 border-b border-gray-700 text-left">Name</th>
-                <th className="px-4 py-2 border-b border-gray-700 text-left hidden lg:flex">Email</th>
+                  <th className="px-4 py-2 border-b border-gray-700 text-left hidden lg:table-cell">Email</th>
                 <th className="px-4 py-2 border-b border-gray-700 text-left">Status</th>
-                <th className="px-4 py-2 border-b border-gray-700 text-left hidden lg:flex">Coach</th>
-                <th className="px-4 py-2 border-b border-gray-700 text-left">Phone</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left hidden lg:table-cell">Coach</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left hidden lg:table-cell">Phone</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, index) => (
                 <tr key={index} className="hover:bg-gray-900">
                   <td className="px-4 py-2 ">{user.fullname}</td>
-                  <td className="px-4 py-2 hidden lg:flex">{user.email}</td>
+                  <td className="px-4 py-2 hidden lg:table-cell">{user.email}</td>
                   <td className="px-4 py-2 "><div className={`border ${user.subscription === "Disactivated" ? "border-red-600" : "border-green-600"}  w-fit px-2 py-1 rounded-lg`}>{user.subscription}</div></td>
-                  <td className="px-4 py-2 hidden lg:flex">{user.trainer}</td>
-                  <td className="px-4 py-2 ">{user.phoneNumber}</td>
+                  <td className="px-4 py-2 hidden lg:table-cell">{user.trainer}</td>
+                  <td className="px-4 py-2 hidden lg:table-cell">{user.phoneNumber}</td>
                 </tr>
               ))}
             </tbody>

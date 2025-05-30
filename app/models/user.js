@@ -14,6 +14,11 @@ const FitfamSchema = new mongoose.Schema(
     serviceEndDate: Date, // Add this field for subscription expiry
     resetPasswordCode: String, // Store reset code
     resetPasswordExpires: Date, // Expiry date for the reset code
+    trainerChangeRequest: {
+      trainer: String,
+      reason: String,
+      status: String, // 'pending', 'approved', 'disapproved'
+    },
   },
   { timestamps: true }
 );

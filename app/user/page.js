@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { Toaster, toast } from "sonner";
 import WorkoutCard from "../admin/WorkoutCard";
 import PlanModal from "../components/PlanModal";
+import ChangeTrainerModal from "../components/ChangeTrainerModal";
 import html2canvas from "html2canvas";
 
 const page = () => {
@@ -28,6 +29,9 @@ const page = () => {
   const [userInfo, setUserInfo] = useState("");
   const [showplan, setShowPlan] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
+  const [showChangeTrainer, setShowChangeTrainer] = useState(false);
+  const [reviewingTrainerRequest, setReviewingTrainerRequest] = useState(false);
+  const [pendingTrainerRequest, setPendingTrainerRequest] = useState(null);
   const router = useRouter();
 
   const handleShowPlan = () => {
@@ -99,6 +103,20 @@ const page = () => {
     link.click();
   };
 
+  const handleSendTrainerRequest = async (trainer, reason) => {
+    setReviewingTrainerRequest(true);
+    setPendingTrainerRequest({ trainer, reason });
+    // Send request to backend for admin review
+    await axios.post("/api/auth/trainerChangeRequest", {
+      userId: userInfo._id,
+      trainer,
+      reason,
+    });
+    // Optionally, show a toast
+    toast.success("Trainer change request sent! Awaiting admin approval.");
+    setShowChangeTrainer(false);
+  };
+
   if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
 
   // console.log('userInfo:', userInfo); // Debug: check what is coming from backend
@@ -161,7 +179,9 @@ const page = () => {
               </p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
-                <p className="text-red-600 mt-4">change Trainer</p>
+                <p className="text-red-600 mt-4 cursor-pointer" onClick={() => setShowChangeTrainer(true)}>
+                  change Trainer
+                </p>
               </div>
             </div>
 
@@ -446,6 +466,14 @@ const page = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {showChangeTrainer && (
+        <ChangeTrainerModal
+          onClose={() => setShowChangeTrainer(false)}
+          onSendRequest={handleSendTrainerRequest}
+          reviewing={reviewingTrainerRequest}
+        />
       )}
     </div>
   );
