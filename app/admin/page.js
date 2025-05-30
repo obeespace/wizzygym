@@ -102,7 +102,7 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <HiStatusOnline className="text-black" />
               </div>
-              <p className="text-xl font-semibold mt-4">240</p>
+              <p className="text-xl font-semibold mt-4">{users.filter(u => u.subscription === "Active").length}</p>
               <p className="text-sm">Active Customers</p>
               <p className="text-red-600 mt-4">10.9%</p>
             </div>
@@ -166,10 +166,6 @@ const page = () => {
 
       <div className="lg:mt-4 mt-10 lg:flex">
         <div>
-        <p className="text-2xl font-semibold">
-          Fitfam <span className="text-red-600 italic">Details</span>
-        </p>
-
         <div className="mt-5">
           <AdminTable users={users}/>
         </div>
