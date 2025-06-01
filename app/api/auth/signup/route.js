@@ -50,7 +50,7 @@ export async function POST(request) {
       bodygoals,
       gender,
       nickname,
-      subscription: "Disactivated",
+      subscription: "Deactivated",
       trainer: "New User",
       password: hashedPassword,
     });

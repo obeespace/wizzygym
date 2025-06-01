@@ -24,6 +24,10 @@ import PlanModal from "../components/PlanModal";
 import ChangeTrainerModal from "../components/ChangeTrainerModal";
 import html2canvas from "html2canvas";
 
+const SkeletonBox = ({ className = "", style = {} }) => (
+  <div className={`animate-pulse bg-gray-700 rounded ${className}`} style={style} />
+);
+
 const page = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [userInfo, setUserInfo] = useState("");
@@ -79,8 +83,8 @@ const page = () => {
       if (endDate < now && userInfo.subscription === "Active") {
         setUserInfo((prev) => ({
           ...prev,
-          subscription: "Disactivated",
-          trainer: "Disactivated",
+          subscription: "Deactivated",
+          trainer: "Deactivated",
         }));
       }
     }
@@ -117,7 +121,91 @@ const page = () => {
     setShowChangeTrainer(false);
   };
 
-  if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
+  if (!userInfo) {
+    // Skeleton loading UI
+    return (
+      <div className="w-5/6 mx-auto mt-10">
+        <Toaster position="top-right" richColors />
+        <div className="lg:flex gap-5">
+          <div className="flex-1">
+            <SkeletonBox className="h-8 w-1/2 mb-2" />
+            <SkeletonBox className="h-4 w-1/3 mb-6" />
+            <div className="mt-7 lg:flex grid grid-cols-2 lg:gap-5 gap-2">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="rounded-xl shadow-sm lg:px-3 px-5 py-5 mb-3 shadow-gray-700 border border-gray-700">
+                  <SkeletonBox className="h-8 w-8 mb-4" />
+                  <SkeletonBox className="h-6 w-1/2 mb-2" />
+                  <SkeletonBox className="h-4 w-2/3" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl border lg:w-3/12 mt-10 lg:mt-0 px-4 py-4 border-gray-600 bg-gray-950">
+            <SkeletonBox className="h-6 w-1/2 mb-4" />
+            {[1, 2, 3, 4].map((i) => (
+              <div className="mt-5 flex gap-3 items-center" key={i}>
+                <SkeletonBox className="h-8 w-8" />
+                <SkeletonBox className="h-4 w-2/3" />
+              </div>
+            ))}
+          </div>
+          <div className="flex-1">
+            <div className="rounded-xl border mt-5 px-4 py-4 border-gray-600">
+              <SkeletonBox className="h-6 w-1/2 mb-4" />
+              {[1, 2, 3, 4].map((i) => (
+                <div className="mt-5 flex gap-3 items-center" key={i}>
+                  <SkeletonBox className="h-8 w-8" />
+                  <SkeletonBox className="h-4 w-2/3" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="lg:flex gap-5 mt-10">
+          <div className="lg:w-4/12">
+            <SkeletonBox className="h-6 w-1/3 mb-4" />
+            <div className="rounded-xl border mt-5 px-4 py-4 border-gray-600">
+              {[1, 2, 3, 4].map((i) => (
+                <div className="mt-5 flex gap-3 items-center" key={i}>
+                  <SkeletonBox className="h-8 w-8" />
+                  <SkeletonBox className="h-4 w-2/3" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl border lg:w-4/12 mt-5 border-gray-600">
+            <div className="bg-gray-950 shadow-gray-600 shadow-md rounded-xl px-4 py-4">
+              <SkeletonBox className="h-6 w-1/2 mb-4" />
+              <SkeletonBox className="h-8 w-2/3 mb-4 mx-auto" />
+              <SkeletonBox className="h-4 w-1/3 ml-auto" />
+            </div>
+            <div className="px-4 py-3">
+              <SkeletonBox className="h-4 w-1/2 mb-2" />
+              {[1, 2, 3].map((i) => (
+                <div className="flex justify-between mt-2" key={i}>
+                  <SkeletonBox className="h-4 w-1/4" />
+                  <SkeletonBox className="h-4 w-1/4" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:w-4/12 flex flex-col items-center justify-center mt-10 lg:mt-0">
+            <SkeletonBox className="h-10 w-40 mb-4" />
+            <SkeletonBox className="h-10 w-32" />
+          </div>
+        </div>
+        <div className="mt-10">
+          {/* WorkoutCard skeleton */}
+          <div className="rounded-xl border border-gray-700 p-6">
+            <SkeletonBox className="h-6 w-1/3 mb-4" />
+            {[1, 2, 3].map((i) => (
+              <SkeletonBox key={i} className="h-4 w-full mb-2" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // console.log('userInfo:', userInfo); // Debug: check what is coming from backend
 
@@ -171,15 +259,34 @@ const page = () => {
               <p className="text-xl font-semibold mt-4">
                 {userInfo.trainer &&
                 userInfo.trainer !== "New User" &&
-                userInfo.trainer !== "Disactivated"
+                userInfo.trainer !== "Deactivated"
                   ? userInfo.trainer
                   : userInfo.subscription === "Active"
                   ? "Assigned Trainer"
-                  : "Disactivated"}
+                  : "Deactivated"}
               </p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
-                <p className="text-red-600 mt-4 cursor-pointer" onClick={() => setShowChangeTrainer(true)}>
+                <p className={`mt-4 cursor-pointer ${userInfo.subscription !== "Active" ? "text-gray-400 cursor-not-allowed" : "text-red-600"}`}
+                  onClick={userInfo.subscription === "Active" ? () => setShowChangeTrainer(true) : undefined}
+                  disabled={userInfo.subscription !== "Active"}
+                  title={userInfo.subscription !== "Active" ? "Buy a plan to enable this option" : ""}
+                  onMouseOver={e => {
+                    if (userInfo.subscription !== "Active") {
+                      e.currentTarget.style.position = 'relative';
+                      const tooltip = document.createElement('span');
+                      tooltip.textContent = 'Buy a plan to enable this option';
+                      tooltip.className = 'absolute left-0 top-full mt-1 px-2 py-1 bg-black text-white text-xs rounded z-50';
+                      tooltip.style.whiteSpace = 'nowrap';
+                      tooltip.id = 'change-trainer-tooltip';
+                      e.currentTarget.appendChild(tooltip);
+                    }
+                  }}
+                  onMouseOut={e => {
+                    const tooltip = e.currentTarget.querySelector('#change-trainer-tooltip');
+                    if (tooltip) tooltip.remove();
+                  }}
+                >
                   change Trainer
                 </p>
               </div>
@@ -432,7 +539,7 @@ const page = () => {
                 <p className="text-green-400 font-semibold">
                   {userInfo.subscription === "Active"
                     ? "Active Subscription"
-                    : "Disactivated"}
+                    : "Deactivated"}
                 </p>
               
 

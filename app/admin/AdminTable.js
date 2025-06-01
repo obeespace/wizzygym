@@ -83,7 +83,7 @@ const BasicTable = ({ users }) => {
                 <td className="px-4 py-2 ">
                   <div
                     className={`border ${
-                      user.subscription === "Disactivated"
+                      user.subscription === "Deactivated"
                         ? "border-red-600"
                         : "border-green-600"
                     }  w-fit px-2 py-1 rounded-lg`}
