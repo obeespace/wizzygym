@@ -206,7 +206,7 @@ const page = () => {
       </div>
     );
   }
-  if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
+  if (!userInfo || Object.keys(userInfo).length === 0) return <p className="mx-auto w-5/6">Loading...</p>;
 
   // console.log('userInfo:', userInfo); // Debug: check what is coming from backend
 
