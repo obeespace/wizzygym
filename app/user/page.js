@@ -121,7 +121,7 @@ const page = () => {
     setShowChangeTrainer(false);
   };
 
-  if (!userInfo) {
+  if (userInfo === "") {
     // Skeleton loading UI
     return (
       <div className="w-5/6 mx-auto mt-10">
@@ -206,6 +206,7 @@ const page = () => {
       </div>
     );
   }
+  if (!userInfo) return <p className="mx-auto w-5/6">Loading...</p>;
 
   // console.log('userInfo:', userInfo); // Debug: check what is coming from backend
 
