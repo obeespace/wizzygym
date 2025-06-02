@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import MealPlan from "../../../models/mealPlan";
-import connectDb from "../../../util/dbConnect";
+import MealPlan from "../../../../models/mealPlan";
+import connectDb from "../../../../util/dbConnect";
 
 export async function GET() {
   await connectDb();
