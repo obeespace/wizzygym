@@ -98,7 +98,7 @@ const page = () => {
           </h4>
           <p className="mt-3 font-semibold text-lg">+2348164240480</p>
         </div>
-        <div className="lg:mt-10 mt-16 lg:">
+        <div className="lg:mt-10 mt-16 text-black lg:">
           <form id="nameForm" onSubmit={sendEmail}>
             <input
               className="border-b border-black px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
