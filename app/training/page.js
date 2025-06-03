@@ -32,8 +32,7 @@ const page = () => {
               Sign in <IoMdArrowDropright className="text-red-600" />
             </motion.a>
             <p className="text-xs md:text-sm italic w-3/6 md:w-4/6">
-              "Elevate Your Fitness Game, Become your best version, Find your
-              power and Transform Sweat into Strength.
+              "Elevate Your Fitness Game, Become your best version, and Transform Sweat into Strength.
             </p>
           </div>
         </div>
@@ -55,7 +54,7 @@ const page = () => {
         <div>
           <div className="lg:grid grid-cols-2 gap-20 items-center my-28">
             <Image src={monday} className="rounded-2xl " />
-            <div className="w-5/6 mt-10 lg:mt-0">
+            <div className="mt-10 lg:mt-0">
               <p className="font-bold text-xl">Monday</p>
               <hr className="mb-3" />
               <p className="font-semibold">
@@ -81,12 +80,12 @@ const page = () => {
             </div>
           </div>
 
-          <div className="flex justify-end my-28"><div className="lg:grid grid-cols-2 gap-20">
+          <div className="lg:grid grid-cols-2 gap-20">
             <Image
               src={tuesday}
               className="rounded-2xl mt-10 lg:mt-0 order-1 shadow-sm shadow-gray-700"
             />
-            <div className="w-5/6 flex flex-col text-right mt-10 lg:mt-0">
+            <div className="text-right mt-10 lg:mt-0">
               <p className="font-bold text-xl">Tuesday</p>
               <hr className="mb-3" />
               <p className="font-semibold">
@@ -114,11 +113,11 @@ const page = () => {
                 <p>Supports posture, strength, and fat loss.</p>
               </div>
             </div>
-          </div></div>
+          </div>
 
           <div className="lg:grid grid-cols-2 gap-20 items-center my-28">
             <Image src={wednesday} className="rounded-2xl mt-10 lg:mt-0" />
-            <div className="w-5/6 mx-auto text-center mt-10 lg:mt-0">
+            <div className="mt-10 lg:mt-0">
               <p className="font-bold text-xl">Wednesday</p>
               <hr className="mb-3" />
               <p className="font-semibold">
@@ -146,7 +145,7 @@ const page = () => {
               src={thursday}
               className="rounded-2xl mt-10 lg:mt-0 order-1"
             />
-            <div className="w-5/6 mx-auto text-center mt-10 lg:mt-0">
+            <div className="text-right mt-10 lg:mt-0">
               <p className="font-bold text-xl">Thursday</p>
               <hr className="mb-3" />
               <p className="font-semibold">
@@ -178,9 +177,9 @@ const page = () => {
             </div>
           </div>
 
-          <div className="lg:grid grid-cols-2 items-center my-20">
+          <div className="lg:grid grid-cols-2 items-center gap-20 my-20">
             <Image src={trainingimg} className="rounded-lg mt-10 lg:mt-0" />
-            <div className="w-5/6 mx-auto text-center mt-10 lg:mt-0">
+            <div className="mt-10 lg:mt-0">
               <p className="font-bold text-xl">Friday</p>
               <hr className="mb-3" />
               <p className="font-semibold">
@@ -211,7 +210,7 @@ const page = () => {
               src={trainingimg}
               className="rounded-lg mt-10 lg:mt-0 order-1"
             />
-            <div className="w-5/6 mx-auto text-center mt-10 lg:mt-0">
+            <div className="mt-10 lg:mt-0 text-right">
               <p className="font-bold text-xl">Saturday</p>
               <hr className="mb-3" />
               <p className="font-semibold">
