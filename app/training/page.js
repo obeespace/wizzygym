@@ -9,6 +9,8 @@ import monday from "../image/monday.jpg";
 import tuesday from "../image/tuesday.jpg";
 import wednesday from "../image/wednesday.jpg";
 import thursday from "../image/thursday.jpg";
+import friday from "../image/friday.jpg";
+import saturday from "../image/saturday.jpg";
 
 const page = () => {
   return (
@@ -178,7 +180,7 @@ const page = () => {
           </div>
 
           <div className="lg:grid grid-cols-2 items-center gap-20 my-20">
-            <Image src={trainingimg} className="rounded-lg mt-10 lg:mt-0" />
+            <Image src={friday} className="rounded-lg mt-10 lg:mt-0" />
             <div className="mt-10 lg:mt-0">
               <p className="font-bold text-xl">Friday</p>
               <hr className="mb-3" />
@@ -207,7 +209,7 @@ const page = () => {
 
           <div className="lg:grid grid-cols-2 gap-20 items-center my-20">
             <Image
-              src={trainingimg}
+              src={saturday}
               className="rounded-lg mt-10 lg:mt-0 order-1"
             />
             <div className="mt-10 lg:mt-0 text-right">

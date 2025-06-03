@@ -12,11 +12,11 @@ const Footer = () => {
             <p>Aerobics</p>
             <p>See all</p>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
             <p className="font-semibold text-red-600">Company</p>
-            <p>About</p>
-            <p>Training</p>
-            <p>Contact</p>
+            <a href='/blog'>Blog</a>
+            <a href='/training'>Training</a>
+            <a href='/contact'>Contact</a>
           </div>
           <div className="flex flex-col gap-2 -mt-16 lg:mt-0">
             <p className="font-semibold text-red-600">Socials</p>
