@@ -33,8 +33,8 @@ const page = () => {
             >
               Sign in <IoMdArrowDropright className="text-red-600" />
             </motion.a>
-            <p className="text-xs md:text-sm italic w-3/6 md:w-4/6">
-              "Elevate Your Fitness Game, Become your best version, and Transform Sweat into Strength.
+            <p className="text-xs md:text-sm w-3/6 md:w-4/6">
+              "Elevate Your Fitness Game and Transform into your best version.
             </p>
           </div>
         </div>
