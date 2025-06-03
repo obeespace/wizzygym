@@ -41,8 +41,7 @@ const page = () => {
       <Toaster position="top-right" richColors />
       <div className="lg:flex gap-20">
         <p className="lg:text-6xl text-5xl font-black lg:w-4/6 w-full">
-          Kindly leave us a <span className="italic text-red-600">message</span>{" "}
-          or come visit us
+          Kindly leave a <span className="italic text-red-600">message</span>{" "}
         </p>
         <div className="mt-8 lg:mt-0">
           <p>
@@ -80,14 +79,12 @@ const page = () => {
             >
               <FaTiktok size={24} className="text-black hover:text-blue-900" />
             </a>
-            <p className="text-xs md:text-sm italic w-3/6 md:w-4/6">
-              08123456789, 08123456789, 08123456789, 08123456789
-            </p>
+            
           </div>
         </div>
       </div>
 
-      <Image src={contact} className="rounded-2xl mt-10 scale-x-[-1]" />
+      <Image src={contact} alt="" className="rounded-2xl mt-10 scale-x-[-1]" />
 
       <div className="mt-16 lg:mt-20 lg:flex justify-around items-center gap-20">
         <div className="lg:w-5/12 text-center">
