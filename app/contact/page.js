@@ -1,96 +1,90 @@
-import React from "react";
-import {
-  BsDribbble,
-  BsFacebook,
-  BsInstagram,
-  BsLinkedin,
-} from "react-icons/bs";
-import contactimage from "../image/contactimage2.png";
-import { motion } from "framer-motion";
+"use client";
 import Image from "next/image";
-import Link from "next/link";
+import { Toaster, toast } from "sonner";
+import React from "react";
+import { IoMdArrowDropright } from "react-icons/io";
+import contactimg from "../image/contactus.jpg";
+import { motion } from "framer-motion";
+// import FloatingSocials from "../component/FloatingSocials";
+import emailjs from "@emailjs/browser";
+import FloatingSocials from "../components/FloatingSocials";
 
 const page = () => {
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_7rfdysx", 
+        "template_a2kcvvb", 
+        e.target,
+        "E_sBA160DotyE3DqV"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          toast.success("Message sent successfully!");
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error("Failed to send message. Please try again.");
+        }
+      );
+
+    e.target.reset(); // Reset the form after submission
+  };
+
   return (
-    <main className="w-5/6 mx-auto my-20">
-      {/* <div className="lg:w-3/6">
-          <p className="mb-2">Contact us</p>
-          <p className="text-4xl font-semibold">Let’s Build Something</p>
-          <p className="mt-3 text-lg text-gray-700">
-            Don’t be shy, say hello! Ready to change the world with your project
-            or have questions
-          </p>
-        </div> */}
-      <div className="relative">
-        <Image
-          src={contactimage}
-          className="w-screen rounded-3xl h-80 lg:h-96 lg:object-cover "
-        />
-        <div
-          className="absolute flex flex-col  
-            items-center top-0 
-            bottom-0 text-center"
-        >
-          <p className="text-4xl mt-5 lg:text-5xl font-playfair">
-          Contact us
-          </p>
-          <p className="italic mt-5 font-thin text-lg text-center">
-          Let’s Build Something
-          </p>
-          <p className="mt-3 text-lg ">
-            Don’t be shy, say hello! Ready to change the world <br/>with your project
-            or have questions
-          </p>
+    <div className="w-9/12 lg:flex justify-between items-center mx-auto text-center my-10">
+        <Toaster position="top-right" richColors />
+      <div className="lg:w-5/12">
+        <div className="flex justify-center mb-3">
+          <Image src={contactimg} alt="man on phone" className="h-32 w-32 rounded-full" />
         </div>
+        <h2 className="lg:text-4xl text-3xl lg:font-bold font-black">
+          Lets Collaborate on your Next project
+        </h2>
+        <h4 className="mt-3 text-lg">
+          You have seen what I do, Now lets talk about you and that amazing idea you have.
+        </h4>
+        <p className="mt-3">+2348164240480</p>
       </div>
-
-      <section className="mt-40 mx-auto w-11/12 lg:flex justify-between">
-        <div className="lg:w-5/12">
-          <div className="mb-5">
-            <p className="mb-2 text-lg font-semibold">Contact Us</p>
-            <div className="flex justify-between">
-              <p>info@wizzypro.fitness</p>
-              {/* <p>(234) 806 314 5125</p> */}
-            </div>
-          </div>
-
-          <hr className="" />
-
-          <div className="mt-5">
-            <p className="mb-4 text-lg font-semibold">Follow us</p>
-            <div className="flex gap-14 text-2xl">
-              <BsDribbble />
-              <BsLinkedin />
-              <BsFacebook />
-              <BsInstagram />
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-20 lg:mt-0 lg:w-5/12 mx-auto flex text-black flex-col items-center">
-          <div className="w-full justify-between items-center ">
-            <input
-              placeholder="Name"
-              className="border-b border-black px-3 py-1 w-full mb-5 rounded-md  placeholder:text-gray-400 outline-none"
-            />
-            <input
-              placeholder="Email"
-              className="border-b border-black px-3 py-1 w-full mb-5 lg:mb-0 rounded-md placeholder:text-gray-400 outline-none"
-            />
-          </div>
-          <textarea
-            className="w-full px-3 py-1 border-b border-black mt-2 lg:mt-5 rounded-md  placeholder:text-gray-400 outline-none"
-            placeholder="Message"
-            rows={5}
+      <div className="lg:mt-10 mt-16">
+        <form id="nameForm" onSubmit={sendEmail}>
+          <input
+            className="border-b border-black px-3 py-1 w-full mb-5 rounded-md placeholder:text-gray-400 outline-none"
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            name="name"
+            required
           />
-          <div className="w-full flex justify-end mt-8">
-            <button className="bg-white text-black px-4 hover:bg-gray-900 py-3 rounded-md">
-              Send Message
-            </button>
+          <input
+            className="border-b border-black px-3 py-1 w-full mb-5 lg:mb-0 rounded-md placeholder:text-gray-400 outline-none"
+            type="email"
+            placeholder="Enter your email address"
+            name="email"
+            required
+          />
+          <br />
+          <br />
+          <textarea
+            className="w-full px-3 py-1 border-b border-black mt-2 lg:mt-5 rounded-md placeholder:text-gray-400 outline-none"
+            cols="20"
+            rows="6"
+            name="message"
+            placeholder="Enter your message"
+            required
+          ></textarea>
+          <div className="flex justify-center mt-4">
+            <motion.button whileTap={{ scale: 0.7 }} className="w-fit rounded-xl px-4 py-2 flex items-center gap-1 text-black hover:bg-gray-700 cursor-pointer">
+              Send Message <IoMdArrowDropright />
+            </motion.button>
           </div>
-        </div>
-      </section>
-    </main>
+        </form>
+      </div>
+      <FloatingSocials />
+    </div>
   );
 };
 
