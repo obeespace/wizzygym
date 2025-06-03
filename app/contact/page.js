@@ -7,8 +7,8 @@ import contact from "../image/contact.jpg";
 import { motion } from "framer-motion";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
-import contactimg from "../image/contact.jpg";
 import emailjs from "@emailjs/browser";
+import { GiRotaryPhone } from "react-icons/gi";
 import FloatingSocials from "../components/FloatingSocials";
 
 const page = () => {
@@ -92,11 +92,11 @@ const page = () => {
             Lets be part of your{" "}
             <span className="text-red-600">fitness journey</span>
           </h2>
-          <h4 className="mt-3 text-lg">
+          <h4 className="mt-3">
             You don’t have to be great to start, but you have to start to be
             great. Together, we can achieve anything
           </h4>
-          <p className="mt-3">+2348164240480</p>
+          <p className="mt-3 font-semibold text-lg">+2348164240480</p>
         </div>
         <div className="lg:mt-10 mt-16 lg:">
           <form id="nameForm" onSubmit={sendEmail}>
