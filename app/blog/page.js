@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 function getExcerpt(text, lines = 2) {
-  // Simple excerpt: first 120 chars or first 2 lines
   return text.split("\n").slice(0, lines).join(" ").slice(0, 120) + "...";
 }
 
@@ -12,50 +11,54 @@ export default function BlogList() {
 
   useEffect(() => {
     fetch("/api/auth/admin/postBlog")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setBlogs);
   }, []);
 
-  if (!blogs.length) return <div>Loading...</div>;
+  if (!blogs.length) return <div className="text-center py-8">Loading...</div>;
 
   const [latest, ...rest] = blogs;
 
   return (
-    <div style={{ maxWidth: 900, margin: "auto" }}>
+    <div className="w-11/12 mx-auto lg:mt-20 mt-10 text-black p-4">
       {/* Latest post on top */}
-      <div style={{
-        border: "2px solid #333",
-        marginBottom: 24,
-        padding: 16,
-        borderRadius: 8,
-        background: "blue"
-      }}>
-        <h2>{latest.title}</h2>
-        {latest.imageUrl && <img src={latest.imageUrl} alt="" style={{ maxWidth: "100%", marginBottom: 8 }} />}
-        <p>{getExcerpt(latest.content, 3)}</p>
+      <div className="border-2 border-gray-800 bg-white text-black rounded-lg p-6 mb-6">
+        <h2 className="text-2xl font-semibold mb-2">{latest.title}</h2>
+        {latest.imageUrl && (
+          <img
+            src={latest.imageUrl}
+            alt=""
+            className="w-full mb-4 rounded"
+          />
+        )}
+        <p className="mb-4">{getExcerpt(latest.content, 3)}</p>
         <Link href={`/blog/${latest._id}`}>
-          <button style={{ marginTop: 8 }}>Read More</button>
+          <button className="bg-black text-white px-4 py-2 rounded hover:bg-gray-100 transition">
+            Read More
+          </button>
         </Link>
       </div>
 
       {/* Rest in 2 columns */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 16
-      }}>
-        {rest.map(blog => (
-          <div key={blog._id} style={{
-            border: "1px solid #ccc",
-            borderRadius: 8,
-            padding: 12,
-            background: "#fff"
-          }}>
-            <h3>{blog.title}</h3>
-            {blog.imageUrl && <img src={blog.imageUrl} alt="" style={{ maxWidth: "100%", marginBottom: 8 }} />}
-            <p>{getExcerpt(blog.content)}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {rest.map((blog) => (
+          <div
+            key={blog._id}
+            className="border border-gray-300 rounded-lg p-4 bg-gray-800 text-white shadow-sm"
+          >
+            <h3 className="text-xl font-medium mb-2">{blog.title}</h3>
+            {blog.imageUrl && (
+              <img
+                src={blog.imageUrl}
+                alt=""
+                className="w-full mb-3 rounded"
+              />
+            )}
+            <p className="mb-3">{getExcerpt(blog.content)}</p>
             <Link href={`/blog/${blog._id}`}>
-              <button style={{ marginTop: 8 }}>Read More</button>
+              <button className="text-white bg-black px-3 py-1 rounded hover:bg-blue-700 transition">
+                Read More
+              </button>
             </Link>
           </div>
         ))}
