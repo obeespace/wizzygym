@@ -244,7 +244,7 @@ const page = () => {
                   </p>
                 ) : (
                   <p
-                    className="text-blue-600 mt-4 cursor-pointer"
+                    className="text-green-600 mt-4 cursor-pointer"
                     onClick={handleShowPlan}
                   >
                     See Plans
@@ -268,7 +268,7 @@ const page = () => {
               </p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
-                <p className={`mt-4 cursor-pointer ${userInfo.subscription !== "Active" ? "text-gray-400 cursor-not-allowed" : "text-red-600"}`}
+                <p className={`mt-9 cursor-pointer ${userInfo.subscription !== "Active" ? "text-gray-400 cursor-not-allowed" : "text-red-600"}`}
                   onClick={userInfo.subscription === "Active" ? () => setShowChangeTrainer(true) : undefined}
                   disabled={userInfo.subscription !== "Active"}
                   title={userInfo.subscription !== "Active" ? "Buy a plan to enable this option" : ""}
@@ -316,9 +316,9 @@ const page = () => {
             <p>Meal Plans</p>
           </div>
           <div className="mt-5">
-            <div className="flex gap-3">
-              <div className="bg-white rounded-full px-1 py-1">
-                <WiSunrise className="text-black" />
+            <div className="flex items-center gap-3">
+              <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                <WiSunrise className="text-black h-3 w-3" />
               </div>
 
               <p>Bread and goatmeat sauce</p>
@@ -326,24 +326,24 @@ const page = () => {
           </div>
           <div className="mt-5">
             <div className="flex gap-3">
-              <div className="bg-white rounded-full px-1 py-1">
-                <WiDaySunnyOvercast className="text-black" />
+              <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                <WiDaySunnyOvercast className="text-black h-3 w-3" />
               </div>
               <p>Smoothie and bean cake</p>
             </div>
           </div>
           <div className="mt-5">
             <div className="flex gap-3">
-              <div className="bg-white rounded-full px-1 py-1">
-                <WiDaySunny className="text-black" />
+              <div className="bg-white rounded-full px-1 py-1 flex justify-center items-center h-6 w-6">
+                <WiDaySunny className="text-black h-3 w-3" />
               </div>
               <p>Okra Soup and Ice cream</p>
             </div>
           </div>
           <div className="mt-5">
             <div className="flex gap-3">
-              <div className="bg-white rounded-full px-1 py-1">
-                <TiWeatherNight className="text-black" />
+              <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                <TiWeatherNight className="text-black h-3 w-3" />
               </div>
               <p>Green Tea and liver bread</p>
             </div>
@@ -406,8 +406,8 @@ const page = () => {
 
             <div className="mt-5">
               <div className="flex gap-3">
-                <div className="bg-white rounded-full px-1 py-1">
-                  <WiSunrise className="text-black" />
+                <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                  <WiSunrise className="text-black h-3 w-3" />
                 </div>
 
                 <p>{userInfo.email}</p>
@@ -415,24 +415,24 @@ const page = () => {
             </div>
             <div className="mt-5">
               <div className="flex gap-3">
-                <div className="bg-white rounded-full px-1 py-1">
-                  <WiDaySunnyOvercast className="text-black" />
+                <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                  <WiDaySunnyOvercast className="text-black h-3 w-3" />
                 </div>
                 <p>{userInfo.phoneNumber}</p>
               </div>
             </div>
             <div className="mt-5">
               <div className="flex gap-3">
-                <div className="bg-white rounded-full px-1 py-1">
-                  <WiDaySunny className="text-black" />
+                <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                  <WiDaySunny className="text-black h-3 w-3" />
                 </div>
                 <p>{userInfo.gender}</p>
               </div>
             </div>
             <div className="mt-5">
               <div className="flex gap-3">
-                <div className="bg-white rounded-full px-1 py-1">
-                  <TiWeatherNight className="text-black" />
+                <div className="bg-white rounded-full flex justify-center items-center h-6 w-6">
+                  <TiWeatherNight className="text-black h-3 w-3" />
                 </div>
                 <p>
                   {userInfo.serviceEndDate
