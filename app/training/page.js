@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import trainingmain from "../image/maintrainingpic.jpg";
+import trainingmain from "../image/maintrainingpic1.png";
 import trainingimg from "../image/training2.png";
 import { motion } from "framer-motion";
 import { IoMdArrowDropright } from "react-icons/io";
