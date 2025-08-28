@@ -237,20 +237,24 @@ const page = () => {
                 <p className="text-sm">Subscription status</p>
                 {userInfo.subscription === "Active" ? (
                   <p
-                    className="text-green-600 mt-4 cursor-pointer"
+                    className="text-amber-200 mt-4 cursor-pointer"
                     onClick={handleShowReceipt}
                   >
                     Show Payment
                   </p>
-                ) : (
+                ) : null}
+              </div>
+              {/* Move "See Plans" to the base of the card */}
+              {userInfo.subscription !== "Active" && (
+                <div className="mt-8 flex">
                   <p
-                    className="text-green-600 mt-4 cursor-pointer"
+                    className="text-green-600 flex items-center cursor-pointer"
                     onClick={handleShowPlan}
                   >
-                    See Plans
+                    See Plans <IoMdArrowDropright className="text-green-600" />
                   </p>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             <div className="rounded-xl shadow-sm lg:px-3 px-5 py-5 mb-3 shadow-gray-700 border border-gray-700">
@@ -268,7 +272,7 @@ const page = () => {
               </p>
               <div className="">
                 <p className="text-sm">Assigned trainer</p>
-                <p className={`mt-9 cursor-pointer ${userInfo.subscription !== "Active" ? "text-gray-400 cursor-not-allowed" : "text-red-600"}`}
+                <p className={`mt-9 flex items-center cursor-pointer ${userInfo.subscription !== "Active" ? "text-gray-400 cursor-not-allowed" : "text-red-600"}`}
                   onClick={userInfo.subscription === "Active" ? () => setShowChangeTrainer(true) : undefined}
                   disabled={userInfo.subscription !== "Active"}
                   title={userInfo.subscription !== "Active" ? "Buy a plan to enable this option" : ""}
@@ -288,7 +292,7 @@ const page = () => {
                     if (tooltip) tooltip.remove();
                   }}
                 >
-                  change Trainer
+                  Change Trainer <IoMdArrowDropright className="text-gray-400" />
                 </p>
               </div>
             </div>
@@ -301,7 +305,7 @@ const page = () => {
               <p className="text-sm">Major fitness/body Goals</p>
               <div></div>
               <p className="text-green-600 mt-4 hover:underline cursor-pointer flex items-center">
-                see more <IoMdArrowDropright className="text-red-600" />
+                See More <IoMdArrowDropright className="text-green-600" />
               </p>
             </div>
           </div>
