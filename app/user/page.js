@@ -301,7 +301,7 @@ const page = () => {
               <div className="rounded-full px-2 py-2 bg-white w-fit">
                 <IoMdFitness className="text-black" />
               </div>
-              <p className="text-xl text-green-600 font-semibold mt-4">{userInfo.bodygoals}</p>
+              <p className="text-xl font-semibold mt-4">{userInfo.bodygoals}</p>
               <p className="text-sm">Major fitness/body Goals</p>
               <div></div>
               <p className="text-amber-200 mt-8 hover:underline cursor-pointer flex items-center">
