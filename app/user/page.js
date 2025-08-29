@@ -304,7 +304,7 @@ const page = () => {
               <p className="text-xl font-semibold mt-4">{userInfo.bodygoals}</p>
               <p className="text-sm">Major fitness/body Goals</p>
               <div></div>
-              <p className="text-amber-200 mt-8 hover:underline cursor-pointer flex items-center">
+              <p className="mt-8 hover:underline cursor-pointer flex items-center">
                 See More <IoMdArrowDropright className="text-red-600 underline" />
               </p>
             </div>
