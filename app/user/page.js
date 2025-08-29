@@ -234,13 +234,13 @@ const page = () => {
                 {userInfo.subscription}
               </p>
               <div className="">
-                <p className="text-sm">Subscription status</p>
+                <p className="text-sm flex justify-center">Subscription status</p>
                 {userInfo.subscription === "Active" ? (
                   <p
                     className="text-amber-200 mt-8 cursor-pointer"
                     onClick={handleShowReceipt}
                   >
-                    Show Payment <IoMdArrowDropright className="text-amber-200" />
+                    Show Receipt <IoMdArrowDropright className="text-amber-200" />
                   </p>
                 ) : null}
               </div>
