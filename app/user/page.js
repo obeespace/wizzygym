@@ -248,7 +248,7 @@ const page = () => {
               {userInfo.subscription !== "Active" && (
                 <div className="mt-8 flex">
                   <p
-                    className="text-amber-600 flex items-center cursor-pointer"
+                    className="text-amber-200 flex items-center cursor-pointer"
                     onClick={handleShowPlan}
                   >
                     See Plans <IoMdArrowDropright className="text-amber-200" />
