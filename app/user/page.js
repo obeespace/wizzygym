@@ -25,7 +25,10 @@ import ChangeTrainerModal from "../components/ChangeTrainerModal";
 import html2canvas from "html2canvas";
 
 const SkeletonBox = ({ className = "", style = {} }) => (
-  <div className={`animate-pulse bg-gray-700 rounded ${className}`} style={style} />
+  <div
+    className={`animate-pulse bg-gray-700 rounded ${className}`}
+    style={style}
+  />
 );
 
 const page = () => {
@@ -132,7 +135,10 @@ const page = () => {
             <SkeletonBox className="h-4 w-1/3 mb-6" />
             <div className="mt-7 lg:flex grid grid-cols-2 lg:gap-5 gap-2">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="rounded-xl shadow-sm lg:px-3 px-5 py-5 mb-3 shadow-gray-700 border border-gray-700">
+                <div
+                  key={i}
+                  className="rounded-xl shadow-sm lg:px-3 px-5 py-5 mb-3 shadow-gray-700 border border-gray-700"
+                >
                   <SkeletonBox className="h-8 w-8 mb-4" />
                   <SkeletonBox className="h-6 w-1/2 mb-2" />
                   <SkeletonBox className="h-4 w-2/3" />
@@ -206,7 +212,8 @@ const page = () => {
       </div>
     );
   }
-  if (!userInfo || Object.keys(userInfo).length === 0) return <p className="mx-auto w-5/6">Loading...</p>;
+  if (!userInfo || Object.keys(userInfo).length === 0)
+    return <p className="mx-auto w-5/6">Loading...</p>;
 
   // console.log('userInfo:', userInfo); // Debug: check what is coming from backend
 
@@ -233,17 +240,17 @@ const page = () => {
               >
                 {userInfo.subscription}
               </p>
-              <div className="">
-                <p className="text-sm">Subscription status</p>
-                {userInfo.subscription === "Active" ? (
-                  <p
-                    className="underline mt-8 cursor-pointer flex items-center"
-                    onClick={handleShowReceipt}
-                  >
-                    Show Receipt <IoMdArrowDropright className="text-red-600" />
-                  </p>
-                ) : null}
-              </div>
+
+              <p className="text-sm">Subscription status</p>
+              {userInfo.subscription === "Active" ? (
+                <p
+                  className="underline mt-8 cursor-pointer flex items-center"
+                  onClick={handleShowReceipt}
+                >
+                  Show Receipt <IoMdArrowDropright className="text-red-600" />
+                </p>
+              ) : null}
+
               {/* Move "See Plans" to the base of the card */}
               {userInfo.subscription !== "Active" && (
                 <div className="mt-8 flex">
@@ -270,31 +277,45 @@ const page = () => {
                   ? "Assigned Trainer"
                   : "Deactivated"}
               </p>
-              <div className="">
-                <p className="text-sm">Assigned trainer</p>
-                <p className={`mt-8 flex items-center cursor-pointer ${userInfo.subscription !== "Active" ? "text-gray-400 cursor-not-allowed" : "text-white underline"}`}
-                  onClick={userInfo.subscription === "Active" ? () => setShowChangeTrainer(true) : undefined}
-                  disabled={userInfo.subscription !== "Active"}
-                  title={userInfo.subscription !== "Active" ? "Buy a plan to enable this option" : ""}
-                  onMouseOver={e => {
-                    if (userInfo.subscription !== "Active") {
-                      e.currentTarget.style.position = 'relative';
-                      const tooltip = document.createElement('span');
-                      tooltip.textContent = 'Buy a plan to enable this option';
-                      tooltip.className = 'absolute left-0 top-full mt-1 px-2 py-1 bg-black text-white text-xs rounded z-50';
-                      tooltip.style.whiteSpace = 'nowrap';
-                      tooltip.id = 'change-trainer-tooltip';
-                      e.currentTarget.appendChild(tooltip);
-                    }
-                  }}
-                  onMouseOut={e => {
-                    const tooltip = e.currentTarget.querySelector('#change-trainer-tooltip');
-                    if (tooltip) tooltip.remove();
-                  }}
-                >
-                  Change Trainer <IoMdArrowDropright className="text-red-600" />
-                </p>
-              </div>
+              <p className="text-sm">Assigned trainer</p>
+              <p
+                className={`mt-8 flex items-center cursor-pointer ${
+                  userInfo.subscription !== "Active"
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "text-white underline"
+                }`}
+                onClick={
+                  userInfo.subscription === "Active"
+                    ? () => setShowChangeTrainer(true)
+                    : undefined
+                }
+                disabled={userInfo.subscription !== "Active"}
+                title={
+                  userInfo.subscription !== "Active"
+                    ? "Buy a plan to enable this option"
+                    : ""
+                }
+                onMouseOver={(e) => {
+                  if (userInfo.subscription !== "Active") {
+                    e.currentTarget.style.position = "relative";
+                    const tooltip = document.createElement("span");
+                    tooltip.textContent = "Buy a plan to enable this option";
+                    tooltip.className =
+                      "absolute left-0 top-full mt-1 px-2 py-1 bg-black text-white text-xs rounded z-50";
+                    tooltip.style.whiteSpace = "nowrap";
+                    tooltip.id = "change-trainer-tooltip";
+                    e.currentTarget.appendChild(tooltip);
+                  }
+                }}
+                onMouseOut={(e) => {
+                  const tooltip = e.currentTarget.querySelector(
+                    "#change-trainer-tooltip"
+                  );
+                  if (tooltip) tooltip.remove();
+                }}
+              >
+                Change Trainer <IoMdArrowDropright className="text-red-600" />
+              </p>
             </div>
 
             <div className="rounded-xl shadow-sm lg:px-3 px-5 py-5 mb-3 shadow-gray-700 border border-gray-700">
@@ -303,9 +324,10 @@ const page = () => {
               </div>
               <p className="text-xl font-semibold mt-4">{userInfo.bodygoals}</p>
               <p className="text-sm">Major fitness/body Goals</p>
-              <div></div>
+
               <p className="underline mt-8 hover:underline cursor-pointer flex items-center">
-                See More <IoMdArrowDropright className="text-red-600 underline" />
+                See More{" "}
+                <IoMdArrowDropright className="text-red-600 underline" />
               </p>
             </div>
           </div>
@@ -540,13 +562,12 @@ const page = () => {
               <p className="text-xl font-semibold text-white mb-2">
                 {userInfo.nickname}
               </p>
-              
-                <p className="text-green-400 font-semibold">
-                  {userInfo.subscription === "Active"
-                    ? "Active Subscription"
-                    : "Deactivated"}
-                </p>
-              
+
+              <p className="text-green-400 font-semibold">
+                {userInfo.subscription === "Active"
+                  ? "Active Subscription"
+                  : "Deactivated"}
+              </p>
 
               <div className="flex justify-between w-full text-xs text-gray-400 mt-2">
                 <span>Start Date</span>
