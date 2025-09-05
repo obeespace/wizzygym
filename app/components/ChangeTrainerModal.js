@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { IoMdArrowDropright } from "react-icons/io";
 
 const trainers = [
   "jon",
@@ -52,14 +53,14 @@ const ChangeTrainerModal = ({ onClose, onSendRequest, reviewing }) => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={onClose}
-            className="px-4 py-2 bg-white text-black rounded-xl font-semibold"
+            className="px-4 py-2 border text-white border-white text-black rounded-xl font-semibold"
           >
             Cancel
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={handleSend}
-            className={`px-4 py-2 rounded-xl font-semibold ${reviewing ? "bg-gray-500 text-white" : "bg-red-600 text-white"}`}
+            className={`px-4 py-2 rounded-xl font-semibold ${reviewing ? "bg-gray-500 text-white" : "bg-white text-black"}`}
             disabled={reviewing || !selectedTrainer || !reason}
           >
             {reviewing ? "Reviewing Request" : "Send Request"}
