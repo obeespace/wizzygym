@@ -244,7 +244,7 @@ const page = () => {
               <p className="text-sm">Subscription status</p>
               {userInfo.subscription === "Active" ? (
                 <p
-                  className="underline mt-8 cursor-pointer flex items-center"
+                  className="underline mt-12 cursor-pointer flex items-center"
                   onClick={handleShowReceipt}
                 >
                   Show Receipt <IoMdArrowDropright className="text-red-600" />
@@ -253,7 +253,7 @@ const page = () => {
 
               {/* Move "See Plans" to the base of the card */}
               {userInfo.subscription !== "Active" && (
-                <div className="mt-11 flex">
+                <div className="mt-8 flex">
                   <p
                     className="underline flex items-center cursor-pointer"
                     onClick={handleShowPlan}
