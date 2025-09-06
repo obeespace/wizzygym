@@ -253,7 +253,7 @@ const page = () => {
 
               {/* Move "See Plans" to the base of the card */}
               {userInfo.subscription !== "Active" && (
-                <div className="mt-8 flex">
+                <div className="mt-11 flex">
                   <p
                     className="underline flex items-center cursor-pointer"
                     onClick={handleShowPlan}
