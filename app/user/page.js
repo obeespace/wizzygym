@@ -244,7 +244,7 @@ const page = () => {
               <p className="text-sm">Subscription status</p>
               {userInfo.subscription === "Active" ? (
                 <p
-                  className="underline mt-16 cursor-pointer flex items-center"
+                  className="underline mt-8 cursor-pointer flex items-center"
                   onClick={handleShowReceipt}
                 >
                   Show Receipt <IoMdArrowDropright className="text-red-600" />
