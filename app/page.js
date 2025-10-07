@@ -163,7 +163,7 @@ export default function Home() {
       <section className="lg:mt-40 mt-20">
         <p className="lg:text-4xl text-3xl w-4/6 mx-auto lg:w-full font-bold text-center">Peep our <span className="text-red-600 italic">Daily</span> Fitness Shedule</p>
         <div className="mt-10 border border-white h-80 lg:w-5/6 mx-auto rounded-2xl overflow-hidden flex items-center justify-center">
-          <Image src={timetable} alt="timetable" className="w-full h-full object-contain" />
+          {/* <Image src={timetable} alt="timetable" className="w-full h-full object-contain" /> */}
         </div>
       </section>
 

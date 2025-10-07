@@ -83,7 +83,7 @@ const Nav = () => {
               Training
             </p>
           </Link>
-          <Link href="/blog">
+          {/* <Link href="/blog">
             <p
               className={
                 pathname === "/blog"
@@ -93,7 +93,7 @@ const Nav = () => {
             >
               Blog
             </p>
-          </Link>
+          </Link> */}
           <Link href="contact">
             <p
               className={
@@ -169,7 +169,7 @@ const Nav = () => {
                 </p>
               </Link>
 
-              <Link
+              {/* <Link
                 href="/blog"
                 className="hover:bg-gray-700 w-full hover:text-white text-center rounded-md"
               >
@@ -179,7 +179,7 @@ const Nav = () => {
                 >
                   Blog
                 </p>
-              </Link>
+              </Link> */}
               <Link
                 href="/contact"
                 className="hover:bg-gray-700 w-full hover:text-white text-center rounded-md"
