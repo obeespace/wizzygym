@@ -11,7 +11,7 @@ export async function POST(req) {
     const body = await req.json();
     const { email, password } = body;
 
-    const user = await Fitfams.findOne({ email });
+    const user = await Fitfams.findOne({ email }).select("_id password email");
     if (!user) {
       return NextResponse.json(
         { message: "No User found, Signup!" },
@@ -29,8 +29,8 @@ export async function POST(req) {
 
     // Handle admin token
     let adminToken = "";
-    if (email === "obeewon20@gmail.com") {
-      adminToken = "runjozi";
+    if (email === process.env.ADMIN_EMAIL) {
+      adminToken = process.env.ADMIN_TOKEN;
     }
 
     const token = jwt.sign({ id: user.id }, process.env.SECRET, {

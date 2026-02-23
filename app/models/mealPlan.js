@@ -8,6 +8,8 @@ const mealPlan = mongoose.Schema(
 	{ timestamps: true },
 );
 
-const mealplan = mongoose.model("mealplan", mealPlan);
+mealPlan.index({ category: 1 });
+
+const mealplan = mongoose.models.mealplan || mongoose.model("mealplan", mealPlan);
 
 export default mealplan;

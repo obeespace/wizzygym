@@ -12,7 +12,9 @@ export async function POST(req) {
     const user = await Fitfams.findOne({
       email,
       resetPasswordCode: resetCode,
-    });
+    })
+      .select("resetPasswordExpires")
+      .lean();
 
     if (!user) {
       return NextResponse.json(

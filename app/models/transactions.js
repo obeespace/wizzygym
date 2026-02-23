@@ -10,6 +10,9 @@ const transactionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+transactionSchema.index({ reference: 1 });
+transactionSchema.index({ email: 1, createdAt: -1 });
+
 // Prevent model overwrite upon hot-reload in development
 const Transaction =
   mongoose.models.Transaction || mongoose.model("Transaction", transactionSchema);

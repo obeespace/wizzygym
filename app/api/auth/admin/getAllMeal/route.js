@@ -7,7 +7,7 @@ export async function GET() {
 
   try {
     // Fetch all meals from the database
-    const meals = await MealPlan.find();
+    const meals = await MealPlan.find().sort({ createdAt: -1 }).lean();
 
     // If no meals found, send an appropriate response
     if (!meals || meals.length === 0) {

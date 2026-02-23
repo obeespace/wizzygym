@@ -7,7 +7,7 @@ export async function GET() {
 
   try {
     // Fetch all workouts from the database
-    const workouts = await HomeExercise.find();
+    const workouts = await HomeExercise.find().sort({ createdAt: -1 }).lean();
 
     // If no workouts found, send an appropriate response
     if (!workouts || workouts.length === 0) {

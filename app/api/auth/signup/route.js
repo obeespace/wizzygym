@@ -32,7 +32,7 @@ export async function POST(request) {
     }
 
     // Check if a user with the provided email already exists
-    const existingUser = await Fitfams.findOne({ email });
+    const existingUser = await Fitfams.findOne({ email }).select("_id").lean();
     if (existingUser) {
       return Response.json(
         { message: "User with this email already exists" },

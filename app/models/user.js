@@ -23,6 +23,10 @@ const FitfamSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+FitfamSchema.index({ email: 1 });
+FitfamSchema.index({ "trainerChangeRequest.status": 1 });
+FitfamSchema.index({ email: 1, resetPasswordCode: 1 });
+
 // Prevent model overwrite upon hot-reload in development
 const Fitfams = mongoose.models.Fitfam || mongoose.model("Fitfam", FitfamSchema);
 

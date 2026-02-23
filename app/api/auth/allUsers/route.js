@@ -7,7 +7,10 @@ export async function GET() {
 
   try {
     // Retrieve all users, excluding passwords
-    const users = await Fitfams.find({}).select("-password");
+    const users = await Fitfams.find({})
+      .select("-password")
+      .sort({ createdAt: -1 })
+      .lean();
     return NextResponse.json(users);
   } catch (error) {
     console.error("Error fetching users:", error);

@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import transact from "../../../models/transactions";
 import axios from "axios";
+import dbConnect from "../../../util/dbConnect";
 
 export async function POST(req) {
   try {
+    await dbConnect();
+
     const body = await req.json();
     const { email, amount } = body;
 
@@ -22,12 +25,11 @@ export async function POST(req) {
       }
     );
 
-    const newTransaction = new transact({
+    await transact.create({
       email,
       amount,
       reference: response.data.data.reference,
     });
-    await newTransaction.save();
 
     return NextResponse.json(response.data, { status: 200 });
   } catch (error) {

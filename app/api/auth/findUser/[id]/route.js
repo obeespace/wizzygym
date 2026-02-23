@@ -9,7 +9,7 @@ export async function GET(req, { params }) {
     const userId = params.id;
 
     // Fetch the user from the database by ID, exclude password
-    const user = await Fitfams.findById(userId).select("-password");
+    const user = await Fitfams.findById(userId).select("-password").lean();
 
     if (!user) {
       return NextResponse.json(

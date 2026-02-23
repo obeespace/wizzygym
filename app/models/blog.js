@@ -10,4 +10,6 @@ const BlogSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+BlogSchema.index({ createdAt: -1 });
+
 export default mongoose.models.Blog || mongoose.model("Blog", BlogSchema);

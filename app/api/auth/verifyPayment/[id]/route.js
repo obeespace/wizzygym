@@ -25,12 +25,20 @@ export async function POST(req) {
     const paymentData = response.data.data;
     if (paymentData.status === "success") {
       // Update the user's subscription status
-      const transaction = await transact.findOne({ reference });
+      const transaction = await transact
+        .findOne({ reference })
+        .select("email amount")
+        .lean();
+
       if (!transaction) {
         return NextResponse.json({ error: "Transaction not found" }, { status: 404 });
       }
 
-      const user = await Fitfams.findOne({ email: transaction.email });
+      const user = await Fitfams
+        .findOne({ email: transaction.email })
+        .select("_id serviceEndDate trainer")
+        .lean();
+
       if (!user) {
         return NextResponse.json({ error: "User not found" }, { status: 404 });
       }
@@ -48,21 +56,34 @@ export async function POST(req) {
       if (user.serviceEndDate && new Date(user.serviceEndDate) > now) {
         baseDate = new Date(user.serviceEndDate);
       }
-      user.serviceEndDate = new Date(baseDate.getTime() + durationDays * 24 * 60 * 60 * 1000);
-      user.subscription = "Active";
+
+      const nextServiceEndDate = new Date(
+        baseDate.getTime() + durationDays * 24 * 60 * 60 * 1000
+      );
+
+      const updatedFields = {
+        serviceEndDate: nextServiceEndDate,
+        subscription: "Active",
+      };
 
       // Assign a random trainer if user is new or subscription is being renewed
-      if (!user.trainer || new Date(user.serviceEndDate).getTime() === user.serviceEndDate.getTime() || new Date(user.serviceEndDate) <= now) {
+      if (!user.trainer || user.trainer === "New User") {
         const trainers = ["Wisdom", "Jon", "Panther"];
-        user.trainer = trainers[Math.floor(Math.random() * trainers.length)];
+        updatedFields.trainer = trainers[Math.floor(Math.random() * trainers.length)];
       }
 
-      await user.save();
+      const updatedUser = await Fitfams.findByIdAndUpdate(user._id, updatedFields, {
+        new: true,
+      })
+        .select("fullname nickname email subscription trainer serviceEndDate")
+        .lean();
 
-      transaction.status = "success";
-      await transaction.save();
+      await transact.updateOne({ reference }, { $set: { status: "success" } });
 
-      return NextResponse.json({ message: "Payment verified and subscription updated", user }, { status: 200 });
+      return NextResponse.json(
+        { message: "Payment verified and subscription updated", user: updatedUser },
+        { status: 200 }
+      );
     } else {
       return NextResponse.json({ error: "Payment verification failed" }, { status: 400 });
     }

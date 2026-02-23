@@ -4,7 +4,7 @@ import dbConnect from "../../../../../util/dbConnect";
 
 export async function GET(req, { params }) {
   await dbConnect();
-  const blog = await Blog.findById(params.id);
+  const blog = await Blog.findById(params.id).lean();
   if (!blog) return NextResponse.json({ message: "Not found" }, { status: 404 });
   return NextResponse.json(blog);
 }

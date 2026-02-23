@@ -10,7 +10,9 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { email } = body;
-    const user = await Fitfams.findOne({ email });
+    const user = await Fitfams.findOne({ email }).select(
+      "email resetPasswordCode resetPasswordExpires"
+    );
 
     if (!user) {
       return NextResponse.json(

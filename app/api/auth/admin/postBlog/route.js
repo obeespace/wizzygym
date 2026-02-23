@@ -4,7 +4,7 @@ import dbConnect from "../../../../util/dbConnect";
 
 export async function GET() {
   await dbConnect();
-  const blogs = await Blog.find().sort({ createdAt: -1 });
+  const blogs = await Blog.find().sort({ createdAt: -1 }).lean();
   return NextResponse.json(blogs);
 }
 
